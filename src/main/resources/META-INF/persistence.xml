@@ -5,5 +5,11 @@
              version="3.0">
     <persistence-unit name="default">
 
+        <class>com.example.pointofsale.entities.Account</class>
+        <class>com.example.pointofsale.entities.Receipt</class>
+        <class>com.example.pointofsale.entities.Product</class>
+        <class>com.example.pointofsale.entities.ReceiptProducts</class>
+        <class>com.example.pointofsale.entities.Category</class>
+        <class>com.example.pointofsale.entities.NotificationAccountsDirector</class>
     </persistence-unit>
 </persistence>

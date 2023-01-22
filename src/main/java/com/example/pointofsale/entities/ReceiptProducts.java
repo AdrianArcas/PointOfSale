@@ -8,17 +8,20 @@ import jakarta.persistence.Id;
 @Entity
 public class ReceiptProducts {
 
-    private Long receipt_products_id;
-    public void setReceipt_products_id(Long receipt_products_id) {
-        this.receipt_products_id = receipt_products_id;
+    private Long receipt_product_id;
+    private Integer receipt_id;
+    private Integer product_id;
+    private Integer quantity;
+
+    public void setReceipt_product_id(Long receipt_products_id) {
+        this.receipt_product_id = receipt_products_id;
     }
 
     @Id
     @GeneratedValue
-    public Long getReceipt_products_id() {
-        return receipt_products_id;
+    public Long getReceipt_product_id() {
+        return receipt_product_id;
     }
-    private Integer receipt_id;
 
     @Basic
     public Integer getReceipt_id() {
@@ -29,8 +32,6 @@ public class ReceiptProducts {
         this.receipt_id = receipt_id;
     }
 
-    private Integer product_id;
-
     @Basic
     public Integer getProduct_id() {
         return product_id;
@@ -39,8 +40,6 @@ public class ReceiptProducts {
     public void setProduct_id(Integer product_id) {
         this.product_id = product_id;
     }
-
-    private Integer quantity;
 
     @Basic
     public Integer getQuantity() {

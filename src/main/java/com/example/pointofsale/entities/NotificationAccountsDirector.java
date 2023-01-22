@@ -8,10 +8,11 @@ import jakarta.persistence.Id;
 @Entity
 public class NotificationAccountsDirector {
     private Long notification_id;
+    private Integer modified_or_added_account_id;
+    private Integer who_modified_or_added_id;
+    private String action;
+    private Integer is_validated;
 
-    public void setNotification_id(Long notification_id) {
-        this.notification_id = notification_id;
-    }
 
     @Id
     @GeneratedValue
@@ -19,7 +20,9 @@ public class NotificationAccountsDirector {
         return notification_id;
     }
 
-    private Integer modified_or_added_account_id;
+    public void setNotification_id(Long notification_id) {
+        this.notification_id = notification_id;
+    }
 
     @Basic
     public Integer getModified_or_added_account_id() {
@@ -30,8 +33,6 @@ public class NotificationAccountsDirector {
         this.modified_or_added_account_id = modified_or_added_account_id;
     }
 
-    private Integer who_modified_or_added_id;
-
     @Basic
     public Integer getWho_modified_or_added_id() {
         return who_modified_or_added_id;
@@ -41,8 +42,6 @@ public class NotificationAccountsDirector {
         this.who_modified_or_added_id = who_modified_or_added_id;
     }
 
-    private String action;
-
     @Basic
     public String getAction() {
         return action;
@@ -51,8 +50,6 @@ public class NotificationAccountsDirector {
     public void setAction(String action) {
         this.action = action;
     }
-
-    private Integer is_validated;
 
     @Basic
     public Integer getIs_validated() {

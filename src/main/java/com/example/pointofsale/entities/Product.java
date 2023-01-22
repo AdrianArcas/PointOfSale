@@ -9,16 +9,24 @@ import jakarta.persistence.Id;
 public class Product {
 
     private Long product_id;
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
-    }
+    private String name;
+    private Double price;
+    private Integer quantity;
+    private Integer category;
+    private Integer tva;
+    private String photo;
+
+
 
     @Id
     @GeneratedValue
     public Long getProduct_id() {
         return product_id;
     }
-    private String name;
+
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
+    }
 
     @Basic
     public String getName() {
@@ -29,8 +37,6 @@ public class Product {
         this.name = name;
     }
 
-    private Double price;
-
     @Basic
     public Double getPrice() {
         return price;
@@ -39,8 +45,6 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    private Integer quantity;
 
     @Basic
     public Integer getQuantity() {
@@ -51,8 +55,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    private Integer category;
-
     @Basic
     public Integer getCategory() {
         return category;
@@ -62,8 +64,6 @@ public class Product {
         this.category = category;
     }
 
-    private Integer tva;
-
     @Basic
     public Integer getTva() {
         return tva;
@@ -72,8 +72,6 @@ public class Product {
     public void setTva(Integer tva) {
         this.tva = tva;
     }
-
-    private String photo;
 
     @Basic
     public String getPhoto() {

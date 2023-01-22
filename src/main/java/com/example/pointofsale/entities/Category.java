@@ -8,10 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Category {
     private Long category_id;
-
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
-    }
+    private String name;
 
     @Id
     @GeneratedValue
@@ -19,7 +16,9 @@ public class Category {
         return category_id;
     }
 
-    private String name;
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
+    }
 
     @Basic
     public String getName() {

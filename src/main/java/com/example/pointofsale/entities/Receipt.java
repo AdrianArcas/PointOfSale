@@ -10,9 +10,10 @@ import java.time.*;
 public class Receipt {
 
     private Long receipt_id;
-    public void setReceipt_id(Long receipt_id) {
-        this.receipt_id = receipt_id;
-    }
+    private String cashier_name;
+    private LocalDateTime date;
+    private String payment_method;
+    private Double total;
 
     @Id
     @GeneratedValue
@@ -20,7 +21,9 @@ public class Receipt {
         return receipt_id;
     }
 
-    private String cashier_name;
+    public void setReceipt_id(Long receipt_id) {
+        this.receipt_id = receipt_id;
+    }
 
     @Basic
     public String getCashier_name() {
@@ -31,18 +34,15 @@ public class Receipt {
         this.cashier_name = cashier_name;
     }
 
-    private LocalDateTime date;
 
     @Basic
     public LocalDateTime getDate() {
         return date;
     }
-
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    private String payment_method;
 
     @Basic
     public String getPayment_method() {
@@ -52,8 +52,6 @@ public class Receipt {
     public void setPayment_method(String payment_method) {
         this.payment_method = payment_method;
     }
-
-    private Double total;
 
     @Basic
     public Double getTotal() {

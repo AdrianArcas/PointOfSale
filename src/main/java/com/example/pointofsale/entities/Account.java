@@ -9,10 +9,14 @@ import jakarta.persistence.Id;
 public class Account {
 
     private Long account_id;
+    private String role;
+    private String username;
+    private String email;
+    private String password;
+    private Integer is_active;
+    private String user_photo;
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
-    }
+
 
     @Id
     @GeneratedValue
@@ -20,7 +24,9 @@ public class Account {
         return account_id;
     }
 
-    private String role;
+    public void setAccount_id(Long account_id) {
+        this.account_id = account_id;
+    }
 
     @Basic
     public String getRole() {
@@ -32,8 +38,6 @@ public class Account {
     }
 
 
-    private String username;
-
     @Basic
     public String getUsername() {
         return username;
@@ -42,8 +46,6 @@ public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    private String email;
 
     @Basic
     public String getEmail() {
@@ -55,8 +57,6 @@ public class Account {
     }
 
 
-    private String password;
-
     @Basic
     public String getPassword() {
         return password;
@@ -67,8 +67,6 @@ public class Account {
     }
 
 
-    private Integer is_active;
-
     @Basic
     public Integer getIs_active() {
         return is_active;
@@ -78,8 +76,6 @@ public class Account {
         this.is_active = is_active;
     }
 
-
-    private String user_photo;
 
     @Basic
     public String getUser_photo() {

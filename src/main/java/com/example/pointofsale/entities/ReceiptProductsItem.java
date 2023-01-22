@@ -6,21 +6,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class ReceiptProducts {
+public class ReceiptProductsItem {
 
-    private Long receipt_product_id;
+    private Long receipt_product_item_id;
     private Integer receipt_id;
     private Integer product_id;
     private Integer quantity;
 
-    public void setReceipt_product_id(Long receipt_products_id) {
-        this.receipt_product_id = receipt_products_id;
+    public void setReceipt_product_item_id(Long receipt_products_id) {
+        this.receipt_product_item_id = receipt_products_id;
     }
 
     @Id
     @GeneratedValue
-    public Long getReceipt_product_id() {
-        return receipt_product_id;
+    public Long getReceipt_product_item_id() {
+        return receipt_product_item_id;
     }
 
     @Basic

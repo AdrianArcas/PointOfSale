@@ -1,14 +1,14 @@
 package com.example.pointofsale.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Collection;
 
 @Entity
 public class Category {
     private Long category_id;
     private String name;
+    private Collection<Product> products;
 
     @Id
     @GeneratedValue
@@ -27,5 +27,16 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+
+    @OneToMany(mappedBy = "category")
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 }

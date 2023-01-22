@@ -8,7 +8,7 @@ import java.util.Collection;
 @Entity
 public class Receipt {
 
-    private Long receipt_id;
+    private Long id;
     private String cashier_name;
     private LocalDateTime date;
     private String payment_method;
@@ -17,12 +17,12 @@ public class Receipt {
 
     @Id
     @GeneratedValue
-    public Long getReceipt_id() {
-        return receipt_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setReceipt_id(Long receipt_id) {
-        this.receipt_id = receipt_id;
+    public void setId(Long receipt_id) {
+        this.id = receipt_id;
     }
 
     @Basic

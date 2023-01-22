@@ -1,9 +1,6 @@
 package com.example.pointofsale.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -12,7 +9,7 @@ public class Product {
     private String name;
     private Double price;
     private Integer quantity;
-    private Integer category;
+    private Category category;
     private Integer tva;
     private String photo;
 
@@ -55,14 +52,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    @Basic
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
-    }
 
     @Basic
     public Integer getTva() {
@@ -83,4 +72,12 @@ public class Product {
     }
 
 
+    @ManyToOne
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

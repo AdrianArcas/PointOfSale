@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class ReceiptProductsItem {
 
     private Long receipt_product_item_id;
-//    private Integer receipt_id;
+
     private Receipt receipt;
 
     private Integer product_id;
@@ -22,14 +22,6 @@ public class ReceiptProductsItem {
         return receipt_product_item_id;
     }
 
-//    @Basic
-//    public Integer getReceipt_id() {
-//        return receipt_id;
-//    }
-//
-//    public void setReceipt_id(Integer receipt_id) {
-//        this.receipt_id = receipt_id;
-//    }
 
     @Basic
     public Integer getProduct_id() {

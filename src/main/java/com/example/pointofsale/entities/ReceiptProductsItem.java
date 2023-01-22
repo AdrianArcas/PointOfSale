@@ -1,15 +1,14 @@
 package com.example.pointofsale.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ReceiptProductsItem {
 
     private Long receipt_product_item_id;
-    private Integer receipt_id;
+//    private Integer receipt_id;
+    private Receipt receipt;
+
     private Integer product_id;
     private Integer quantity;
 
@@ -23,14 +22,14 @@ public class ReceiptProductsItem {
         return receipt_product_item_id;
     }
 
-    @Basic
-    public Integer getReceipt_id() {
-        return receipt_id;
-    }
-
-    public void setReceipt_id(Integer receipt_id) {
-        this.receipt_id = receipt_id;
-    }
+//    @Basic
+//    public Integer getReceipt_id() {
+//        return receipt_id;
+//    }
+//
+//    public void setReceipt_id(Integer receipt_id) {
+//        this.receipt_id = receipt_id;
+//    }
 
     @Basic
     public Integer getProduct_id() {
@@ -48,6 +47,16 @@ public class ReceiptProductsItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+
+    @ManyToOne
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 
 }

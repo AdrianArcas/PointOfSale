@@ -1,10 +1,9 @@
 package com.example.pointofsale.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.*;
+import java.util.Collection;
 
 @Entity
 public class Receipt {
@@ -14,6 +13,7 @@ public class Receipt {
     private LocalDateTime date;
     private String payment_method;
     private Double total;
+    private Collection<ReceiptProductsItem> products;
 
     @Id
     @GeneratedValue
@@ -62,4 +62,12 @@ public class Receipt {
         this.total = total;
     }
 
+    @OneToMany(mappedBy = "receipt")
+    public Collection<ReceiptProductsItem> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<ReceiptProductsItem> products) {
+        this.products = products;
+    }
 }

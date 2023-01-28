@@ -20,7 +20,7 @@
                         <a class=".text-primary" style="text-decoration: none;font-size: 135px;font-family: 'Georgia Pro Black'">+</a>
                     </div>
                 </div>
-                <c:forEach var="product" items="${product}">
+                <c:forEach var="product" items="${products}">
                 <div class="col" style="height:230px">
                     <div class="card border border-primary rounded h-100">
                         <img class="card-img-top" src="${pageContext.request.contextPath}/ProductPhoto?id=${product.id}" height="130px" alt=""/>

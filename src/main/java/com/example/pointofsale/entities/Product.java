@@ -11,8 +11,6 @@ public class Product {
     private Integer quantity;
     private Category category;
     private Integer tva;
-    private String photo;
-
 
 
     @Id
@@ -62,16 +60,6 @@ public class Product {
         this.tva = tva;
     }
 
-    @Basic
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-
     @ManyToOne
     public Category getCategory() {
         return category;
@@ -79,5 +67,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    private ProductPhoto photo;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public ProductPhoto getPhoto(){ return photo;}
+
+    public void setPhoto(ProductPhoto photo){
+        this.photo = photo;
     }
 }

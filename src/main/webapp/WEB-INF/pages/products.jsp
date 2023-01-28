@@ -4,11 +4,10 @@
 <t:pageTemplate pageTitle="Green Grocery">
     <h1>Select Products</h1>
     <div class="container border-info mb-3">
-        <c:forEach var="product" items="${product}">
+        <c:forEach var="product" items="${products}">
         <div class="row row-cols-3">
             <div class="col">
                 <div class="card h-100">
-                    <img src="${pageContext.request.contextPath}/CarPhotos?id=${car.id}" width="48"/>
                     <div class="card-body">
                         <h5 class="card-title">Tomato</h5>
                         <p class="card-text">6 lei/kg</p>

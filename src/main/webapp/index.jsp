@@ -15,20 +15,24 @@
     </form>
     <div class="container-md">
             <div class="row row-cols-4 border-5 " style="height: 150px;border-width: 5px;">
-                <div class="col mb-3" style="height:230px">
+                <div class="col mb-3" style="height:238px">
                     <div class="card border border-primary rounded text-center h-100">
                         <a class=".text-primary" href="${pageContext.request.contextPath}/AddProduct" style="text-decoration: none;font-size: 135px;font-family: 'Georgia Pro Black'">+</a>
                     </div>
                 </div>
                 <c:forEach var="product" items="${products}">
-                <div class="col mb-3" style="height:230px">
+                <div class="col mb-3" style="height:238px">
                     <div class="card border border-primary rounded h-100 mb-">
                         <img class="card-img-top" src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}" height="130px" alt=""/>
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <h4 class="card-title text-center">${product.name}</h4>
-                            <p class="card-text " style="font-size: 20px">
-                                <a href="${pageContext.request.contextPath}/AddProductPhoto?product_id=${product.product_id}" class="btn btn-primary btn-lg w-50" style="font-size: 10px" role="button">Add Photo</a>
-                                <b>${product.price}</b></p>
+                            <div class="card-text text-end" style="font-size: 20px">
+                                <b>${product.price}</b></div>
+                            <div class="d-flex flex-row bd-highlight text-center">
+                                <a href="${pageContext.request.contextPath}/AddProductPhoto?product_id=${product.product_id}" class="btn btn-primary btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Add Photo</b></a>
+                                <a href="${pageContext.request.contextPath}/EditProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Update</b></a>
+                                <a href="${pageContext.request.contextPath}/DeleteProduct?product_id=${product.product_id}" class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Delete</b></a>
+                            </div>
                         </div>
                     </div>
                 </div>

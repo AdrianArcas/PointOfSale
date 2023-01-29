@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+@MultipartConfig
 @WebServlet(name = "AddProductPhoto", value = "/AddProductPhoto")
 public class AddProductPhoto extends HttpServlet {
 
@@ -23,11 +24,8 @@ public class AddProductPhoto extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/addProductPhoto.jsp").forward(request, response);
 
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long productId = Long.parseLong(request.getParameter("product_id"));
-
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();
         String fileType = filePart.getContentType();
@@ -35,7 +33,9 @@ public class AddProductPhoto extends HttpServlet {
         byte[] fileContent = new byte[(int) fileSize];
         filePart.getInputStream().read(fileContent);
 
+        Long productId = Long.parseLong(request.getParameter("product_id"));
         productBean.addPhotoToProduct(productId, fileName, fileType, fileContent);
+        response.sendRedirect(request.getContextPath()+"/Products");
 
     }
 }

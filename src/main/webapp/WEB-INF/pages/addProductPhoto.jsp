@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="product_id" value="${product.product_id}"/>
+        <input name="product_id" id="product_id" value="${product.product_id}"/>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
     </form>

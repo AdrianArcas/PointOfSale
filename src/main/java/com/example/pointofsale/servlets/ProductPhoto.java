@@ -16,7 +16,7 @@ public class ProductPhoto extends HttpServlet {
     ProductBean productBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer productId = Integer.parseInt(request.getParameter("id"));
+        Integer productId = Integer.parseInt(request.getParameter("product_id"));
         ProductPhotoDto photo = productBean.findPhotoByProductId(productId);
         if(photo != null){
             response.setContentType(photo.getFileType());
@@ -25,7 +25,6 @@ public class ProductPhoto extends HttpServlet {
         }else{
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
-
     }
 
     @Override

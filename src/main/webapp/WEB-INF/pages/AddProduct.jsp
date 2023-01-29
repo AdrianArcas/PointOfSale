@@ -4,6 +4,7 @@
 
 <t:pageTemplate pageTitle="AddProduct">
   <h1>Add Product</h1>
+  <div class="col position-fi" >
   <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/AddProduct">
     <div class="row">
       <div class="col-md-6 mb-3">
@@ -53,5 +54,7 @@
     <hr class="mb-4">
     <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
   </form>
+      <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/addProduct.jpg" alt="Addproduct" style="bottom: 15%" width="50%">
+  </div>
 
 </t:pageTemplate>

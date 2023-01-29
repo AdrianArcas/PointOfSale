@@ -36,7 +36,10 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" name="category" placeholder="" value="" required>
+        <select class="form-select custom-select d-block w-25" id="category" name="category" required>
+          <option value="1">Vegetable</option>
+          <option value="2">Fruit</option>
+        </select>
         <div class="invalid-feedback">
           Category is required.
         </div>

@@ -28,11 +28,14 @@
                             <h4 class="card-title text-center">${product.name}</h4>
                             <div class="card-text text-end" style="font-size: 20px">
                                 <b>${product.price}</b></div>
+                            <form method="POST" class="m-0" action="${pageContext.request.contextPath}/Products">
+                                <input type="hidden" name="product_id" value="${product.product_id}">
                             <div class="d-flex flex-row bd-highlight text-center">
                                 <a href="${pageContext.request.contextPath}/AddProductPhoto?product_id=${product.product_id}" class="btn btn-primary btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Add Photo</b></a>
                                 <a href="${pageContext.request.contextPath}/EditProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Update</b></a>
-                                <a href="${pageContext.request.contextPath}/Products?product_id=${product.product_id}" class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Delete</b></a>
+                                <button class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" type="submit"><b>Delete</b></button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

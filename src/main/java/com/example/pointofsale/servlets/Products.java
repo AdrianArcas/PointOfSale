@@ -1,5 +1,6 @@
 package com.example.pointofsale.servlets;
 
+import jakarta.annotation.security.DeclareRoles;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.ejb.ProductBean;
 import jakarta.inject.Inject;
@@ -10,6 +11,10 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+@DeclareRoles({"Manager", "Cashier","Director"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
+                {"Cashier"})})
 @WebServlet(name = "Products", value = "/Products")
 public class Products extends HttpServlet {
 

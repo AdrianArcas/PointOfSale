@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:pageTemplate pageTitle="Green Grocery">
-    <h1>Select Products</h1>
+    <h1>Select Products Index</h1>
     <form method="POST" action="${pageContext.request.contextPath}/ProductCategory">
         <div class="d-flex justify-content-start">
             <select class="form-select custom-select d-block w-25" id="category" name="category" required>

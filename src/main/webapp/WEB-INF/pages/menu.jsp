@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #080737;">
+  <nav class="navbar navbar-expand-md navbar-dark <%--fixed-top--%> navbar-static-top" style="background-color: #080737;">
     <div class="container-fluid">
       <a class="navbar-brand" href="${pageContext.request.contextPath}" style="font-family:Sofia,sans-serif">Green Grocery</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,9 +47,11 @@
             </a>
             </c:if>
           </li>
-          <li>
+          <li class="nav-item">
            <c:if test="${pageContext.request.isUserInRole('Director')}">
-            <a class="nav-link" href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/statistics.jsp'?'active':''}" aria-current="page" href="${pageContext.request.contextPath}/statistics.jsp"></a>
+            <a class="nav-link " href="${pageContext.request.contextPath}/Statistics" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+              Statistics
+            </a>
            </c:if>
           </li>
             <c:if test="${pageContext.request.isUserInRole('Manager')}">

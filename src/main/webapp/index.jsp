@@ -7,8 +7,8 @@
         <div class="d-flex justify-content-start">
             <select class="form-select custom-select d-block w-25" id="category" name="category" required>
                 <option value="">Choose...</option>
-                <option value="vegetable">Vegetable</option>
-                <option value="fruit">Fruit</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Fruit">Fruit</option>
             </select>
         <button class="btn btn-primary" type="submit">Choose Category</button>
         </div>
@@ -31,7 +31,7 @@
                             <div class="d-flex flex-row bd-highlight text-center">
                                 <a href="${pageContext.request.contextPath}/AddProductPhoto?product_id=${product.product_id}" class="btn btn-primary btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Add Photo</b></a>
                                 <a href="${pageContext.request.contextPath}/EditProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Update</b></a>
-                                <a href="${pageContext.request.contextPath}/DeleteProduct?product_id=${product.product_id}" class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Delete</b></a>
+                                <a href="${pageContext.request.contextPath}/Products?product_id=${product.product_id}" class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Delete</b></a>
                             </div>
                         </div>
                     </div>

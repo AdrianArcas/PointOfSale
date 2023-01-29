@@ -52,12 +52,12 @@ public class ProductBean {
         Category category = entityManager.find(Category.class, categoryId);
         newProduct.setCategory(category);
         newProduct.setTva(tva);
-        newProduct.setPrice(price + (double) (tva + 100 / 100) *price);
+        newProduct.setPrice(((((double)tva + 100 )/ 100) *price));
         entityManager.persist(newProduct);
     }
 
     public ProductDto findProductById(Long productId) {
-        LOG.info("findById");
+        LOG.info("findProductById");
 
         Product product = entityManager.find(Product.class, productId);
 
@@ -93,5 +93,38 @@ public class ProductBean {
         ProductPhoto photo = photos.get(0); // the first element
         return new ProductPhotoDto(photo.getId(), photo.getFilename(), photo.getFileType(),
                 photo.getFileContent());
+    }
+
+    public List<ProductDto>findProductsByCategory(Long categoryId) {
+        LOG.info("findProductsByCategory");
+        List<Product> productList = entityManager.createQuery( "SELECT p FROM Product p WHERE p.category.category_id = :id", Product.class)
+                .setParameter("id", categoryId)
+                .getResultList();
+        return copyProductsToDto(productList);
+    }
+
+    public Long getCategoryId(String category) {
+        List<Category> Id = entityManager.createQuery("SELECT c FROM Category c where c.name = :name", Category.class)
+                .setParameter("name", category)
+                .getResultList();
+        Long categoryId = Id.get(0).getCategory_id();
+        return categoryId;
+    }
+
+    public void deleteProductById(Long productId) {
+        LOG.info("deleteProductById");
+        Product product = entityManager.find(Product.class, productId);
+        entityManager.remove(product);
+    }
+
+    public void updateProduct(Long productId, String name, Double price, Integer quantity, Long category, Integer tva) {
+        LOG.info("updateProduct");
+        Product product = entityManager.find(Product.class, productId);
+        product.setName(name);
+        product.setQuantity(quantity);
+        Category categoryId = entityManager.find(Category.class, category);
+        product.setCategory(categoryId);
+        product.setTva(tva);
+        product.setPrice(((((double)tva + 100 )/ 100) *price));
     }
 }

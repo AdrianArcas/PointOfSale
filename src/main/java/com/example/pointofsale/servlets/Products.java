@@ -29,6 +29,9 @@ public class Products extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long productId = Long.parseLong(request.getParameter("product_id"));
+        productBean.deleteProductById(productId);
+        response.sendRedirect(request.getContextPath() + "/Products");
 
     }
 }

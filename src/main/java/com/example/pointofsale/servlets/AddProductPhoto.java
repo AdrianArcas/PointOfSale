@@ -16,7 +16,7 @@ public class AddProductPhoto extends HttpServlet {
     ProductBean productBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long productId = Long.parseLong(request.getParameter("id"));
+        Long productId = Long.parseLong(request.getParameter("product_id"));
         ProductDto productDto = productBean.findProductById(productId);
         request.setAttribute("product", productDto);
 

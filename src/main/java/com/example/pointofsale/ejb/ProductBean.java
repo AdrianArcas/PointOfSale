@@ -12,6 +12,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -126,5 +127,11 @@ public class ProductBean {
         product.setCategory(categoryId);
         product.setTva(tva);
         product.setPrice(((((double)tva + 100 )/ 100) *price));
+    }
+    public Collection<String> findProductnamesByIds(Collection<Long> productIds){
+        List<String> productnames=
+                entityManager.createQuery("SELECT p.name FROM Product p WHERE p.product_id IN :productIds", String.class)
+                        .setParameter("productIds", productIds).getResultList();
+        return productnames;
     }
 }

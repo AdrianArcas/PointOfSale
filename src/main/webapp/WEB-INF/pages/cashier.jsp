@@ -5,7 +5,7 @@
     <h1>Cashier</h1>
     <div class="row row-cols-2 border-5" style="height: 150px;border-width: 5px;">
         <div class="col">
-                <a href="${pageContext.request.contextPath}/ProcessSell" class="btn btn-primary btn-lg" type="submit">Sell</a>
+                <a href="${pageContext.request.contextPath}/ProcessSale" class="btn btn-primary btn-lg" type="submit">Sell</a>
         </div>
 
         <div class="col">

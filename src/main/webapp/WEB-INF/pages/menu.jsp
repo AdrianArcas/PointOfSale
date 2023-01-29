@@ -54,14 +54,18 @@
             </a>
            </c:if>
           </li>
+          <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Manager')}">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Add
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Cashier</a>
-              <a class="dropdown-item" href="#">Product</a>
-            </div>
+              <a class="nav-link " href="${pageContext.request.contextPath}/AddAccount" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+                Add Account
+              </a>
+            </c:if>
+          </li>
+          <li class="nav-item">
+            <c:if test="${pageContext.request.isUserInRole('Manager')}">
+              <a class="nav-link " href="${pageContext.request.contextPath}/AddProduct" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+                Add Product
+              </a>
             </c:if>
           </li>
           <li class="nav-item">

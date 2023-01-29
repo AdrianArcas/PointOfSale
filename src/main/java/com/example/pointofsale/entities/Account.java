@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 public class Account {
 
     private Long account_id;
-    private String role;
     private String username;
     private String email;
     private String password;
@@ -26,15 +25,6 @@ public class Account {
 
     public void setAccount_id(Long account_id) {
         this.account_id = account_id;
-    }
-
-    @Basic
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
 

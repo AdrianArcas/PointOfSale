@@ -41,17 +41,24 @@ public class ProcessSale extends HttpServlet {
             Long id = Long.parseLong(request.getParameter("search_input"));
             ProductDto product = productBean.findProductById(id);
             request.setAttribute("product", product);
+
+            if (!invoiceBean.getProductIds().isEmpty()) {
+                Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
+                request.setAttribute("invoices", products);
+            }
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
+
         } else if (valid.equals("form2")) {
 
             String productIdAsString = request.getParameter("product-id");
+
             if (productIdAsString != null) {
                 List<Long> productIds = new ArrayList<>();
                 productIds.add(Long.parseLong(productIdAsString));
                 invoiceBean.getProductIds().addAll(productIds);
             }
-        }
 
+        }
         response.sendRedirect(request.getContextPath() + "/ProcessSale");
     }
 }

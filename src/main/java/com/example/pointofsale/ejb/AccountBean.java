@@ -120,4 +120,20 @@ public class AccountBean {
         return new AccountPhotoDto(photo.getId(), photo.getFilename(), photo.getFileType(),
                 photo.getFileContent());
     }
+
+    public Long getAccountIdByUsername(String username) {
+        LOG.info("getAccountIdByUsernam");
+        List<Account> Accounts = entityManager.createQuery("SELECT a FROM Account a where a.username = :username", Account.class)
+                .setParameter("username", username)
+                .getResultList();
+        return  Accounts.get(0).getAccount_id();
+    }
+
+    public String getAccountUsernameByID(Long id) {
+        LOG.info("getAccountUsernameByID");
+        List<Account> Accounts = entityManager.createQuery("SELECT a FROM Account a where a.account_id = :id", Account.class)
+                .setParameter("id", id)
+                .getResultList();
+        return  Accounts.get(0).getUsername();
+    }
 }

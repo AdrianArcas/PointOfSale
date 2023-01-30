@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Diana
-  Date: 21.01.2023
-  Time: 16:28
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<t:pageTemplate pageTitle="Green Grocery">
+    <h1>Select Notifications</h1>
+    <div class="container border-info mb-3">
+        <c:forEach var="notification" items="${notifications}">
+        ${notification.who_modified_or_added_account_username}
+        </c:forEach>
+    </div>
+</t:pageTemplate>

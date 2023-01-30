@@ -14,7 +14,6 @@ public class CheckAccount extends HttpServlet {
     AccountBean accountBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Verifica daca contul este activat
         if(request.getRemoteUser()!=null&&!accountBean.isActiveByUsername(request.getRemoteUser())){
             request.logout();
             request.getSession().invalidate();

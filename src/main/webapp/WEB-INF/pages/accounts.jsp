@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:pageTemplate pageTitle="Green Grocery">
     <jsp:include page="/CheckAccount" />
-    <h1>Select Products Index</h1>
+    <h1>Accounts</h1>
     <div class="container-md">
         <div class="row row-cols-4 border-5 " style="height: 150px;border-width: 5px;">
             <div class="col mb-3" style="height:238px">

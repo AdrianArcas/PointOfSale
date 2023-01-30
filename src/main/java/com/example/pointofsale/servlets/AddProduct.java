@@ -27,7 +27,6 @@ public class AddProduct extends HttpServlet {
             Long category = Long.valueOf(request.getParameter("category"));
             Integer tva = Integer.valueOf(request.getParameter("tva"));
 
-
             productBean.createProduct(name, price, quantity, category, tva);
 
             response.sendRedirect(request.getContextPath() + "/Products");

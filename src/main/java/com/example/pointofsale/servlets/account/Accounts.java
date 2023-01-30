@@ -1,8 +1,11 @@
-package com.example.pointofsale.servlets;
+package com.example.pointofsale.servlets.account;
 
-import jakarta.annotation.security.DeclareRoles;
+import com.example.pointofsale.common.AccountDto;
 import com.example.pointofsale.common.ProductDto;
+import com.example.pointofsale.ejb.AccountBean;
 import com.example.pointofsale.ejb.ProductBean;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -15,22 +18,22 @@ import java.util.List;
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Manager"}),
         httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
                 {"Manager"})})
-@WebServlet(name = "Products", value = "/Products")
-public class Products extends HttpServlet {
-
+@WebServlet(name = "Accounts", value = "/Accounts")
+public class Accounts extends HttpServlet {
     @Inject
-    ProductBean productBean;
+    AccountBean accountBean;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<ProductDto> products = productBean.findAllProducts();
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        List<AccountDto> accounts = accountBean.findAllAccounts();
+        request.setAttribute("accounts", accounts);
+        request.getRequestDispatcher("/WEB-INF/pages/accounts.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long productId = Long.parseLong(request.getParameter("product_id"));
-        productBean.deleteProductById(productId);
-        response.sendRedirect(request.getContextPath() + "/Products");
+        Long accountId = Long.parseLong(request.getParameter("account_id"));
+        accountBean.deleteAccountById(accountId);
+        response.sendRedirect(request.getContextPath() + "/Accounts");
     }
 }

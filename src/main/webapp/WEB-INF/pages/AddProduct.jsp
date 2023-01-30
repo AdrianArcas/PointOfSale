@@ -57,7 +57,7 @@
     <hr class="mb-4">
     <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
   </form>
-      <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/addProduct.jpg" alt="Addproduct" style="bottom: 15%" width="50%">
+      <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/addProduct.jpg" alt="Addproduct" style="bottom: 15%" width="45%">
   </div>
 
 </t:pageTemplate>

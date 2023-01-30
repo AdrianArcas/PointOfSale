@@ -11,11 +11,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
-
 @Stateless
 public class ProductBean {
     private static final Logger LOG = Logger.getLogger(ProductBean.class.getName());
@@ -53,7 +55,9 @@ public class ProductBean {
         Category category = entityManager.find(Category.class, categoryId);
         newProduct.setCategory(category);
         newProduct.setTva(tva);
-        newProduct.setPrice(((((double)tva + 100 )/ 100) *price));
+        BigDecimal bd = BigDecimal.valueOf((((double)tva + 100 )/ 100) *price);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        newProduct.setPrice(bd.doubleValue());
         entityManager.persist(newProduct);
     }
 

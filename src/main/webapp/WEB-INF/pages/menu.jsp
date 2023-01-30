@@ -57,6 +57,13 @@
           </li>
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Manager')}">
+              <a class="nav-link " href="${pageContext.request.contextPath}/Accounts" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+                Accounts
+              </a>
+            </c:if>
+          </li>
+          <li class="nav-item">
+            <c:if test="${pageContext.request.isUserInRole('Manager')}">
               <a class="nav-link " href="${pageContext.request.contextPath}/AddAccount" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
                 Add Account
               </a>

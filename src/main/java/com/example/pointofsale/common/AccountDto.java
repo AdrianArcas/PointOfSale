@@ -1,30 +1,24 @@
-package com.example.pointofsale.entities;
+package com.example.pointofsale.common;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Account {
-
+public class AccountDto {
     private Long account_id;
     private String username;
     private String email;
     private String password;
     private Boolean is_active;
 
-    private AccountPhoto photo;
+    public AccountDto(Long account_id, String username, String email, String password, Boolean is_active) {
+        this.account_id = account_id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.is_active = is_active;
+    }
 
-    @Id
-    @GeneratedValue
     public Long getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
-    }
-
-
-    @Basic
     public String getUsername() {
         return username;
     }
@@ -33,7 +27,6 @@ public class Account {
         this.username = username;
     }
 
-    @Basic
     public String getEmail() {
         return email;
     }
@@ -42,8 +35,6 @@ public class Account {
         this.email = email;
     }
 
-
-    @Basic
     public String getPassword() {
         return password;
     }
@@ -52,19 +43,11 @@ public class Account {
         this.password = password;
     }
 
-
     public Boolean getIs_active() {
         return is_active;
     }
 
     public void setIs_active(Boolean is_active) {
         this.is_active = is_active;
-    }
-
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public AccountPhoto getPhoto(){ return photo;}
-
-    public void setPhoto(AccountPhoto photo){
-        this.photo = photo;
     }
 }

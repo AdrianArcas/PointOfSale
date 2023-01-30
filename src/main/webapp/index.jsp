@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:pageTemplate pageTitle="Green Grocery">
+    <jsp:include page="/CheckAccount" />
     <h1>Select Products Index</h1>
     <form method="POST" action="${pageContext.request.contextPath}/ProductCategory">
         <div class="d-flex justify-content-start">
@@ -30,7 +31,7 @@
                                 <b>${product.price}</b></div>
                             <form method="POST" class="m-0" action="${pageContext.request.contextPath}/Products">
                                 <input type="hidden" name="product_id" value="${product.product_id}">
-                            <div class="d-flex flex-row bd-highlight text-center">
+                            <div class="d-flex flex-row d-highlight text-center">
                                 <a href="${pageContext.request.contextPath}/AddProductPhoto?product_id=${product.product_id}" class="btn btn-primary btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Add Photo</b></a>
                                 <a href="${pageContext.request.contextPath}/EditProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Update</b></a>
                                 <button class="btn btn-danger btn-lg rounded-0 flex-fill" style="font-size: 10px" type="submit"><b>Delete</b></button>

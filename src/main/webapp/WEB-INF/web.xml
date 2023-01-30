@@ -8,7 +8,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>posRealm</realm-name>
         <form-login-config>
-            <form-login-page>/Products</form-login-page>
+            <form-login-page>/Login</form-login-page>
             <form-error-page>/Login</form-error-page>
         </form-login-config>
     </login-config>

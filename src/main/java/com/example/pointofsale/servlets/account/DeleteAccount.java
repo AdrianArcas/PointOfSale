@@ -1,4 +1,4 @@
-package com.example.pointofsale.servlets.accout;
+package com.example.pointofsale.servlets.account;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

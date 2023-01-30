@@ -12,7 +12,7 @@ public class Account {
     private String username;
     private String email;
     private String password;
-    private Integer is_active;
+    private Boolean is_active;
     private String user_photo;
 
 
@@ -57,15 +57,13 @@ public class Account {
     }
 
 
-    @Basic
-    public Integer getIs_active() {
+    public Boolean getIs_active() {
         return is_active;
     }
 
-    public void setIs_active(Integer is_active) {
+    public void setIs_active(Boolean is_active) {
         this.is_active = is_active;
     }
-
 
     @Basic
     public String getUser_photo() {

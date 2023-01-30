@@ -1,4 +1,4 @@
-package com.example.pointofsale.servlets.accout;
+package com.example.pointofsale.servlets.account;
 
 import com.example.pointofsale.ejb.AccountBean;
 import jakarta.inject.Inject;

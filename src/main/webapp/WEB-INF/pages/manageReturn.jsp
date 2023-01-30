@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:pageTemplate pageTitle="Process Sale">
+<t:pageTemplate pageTitle="Manage Return">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class="row row-cols-2 border-5 position-relative" style="height: 92%;border-width: 5px;">
@@ -11,29 +11,41 @@
                 <%-- search bar  --%>
             <br>
             <form class="needs-validation" novalidate method="POST"
-                  action="${pageContext.request.contextPath}/ProcessSale">
+                  action="${pageContext.request.contextPath}/ManageReturn">
                 <input type="hidden" id="form1" name="form1" value="form1">
                 <div class="input-group " style="height: 50px">
                     <input type="text" class="form-control border border-2 border-primary" id="search_input"
-                           name="search_input" placeholder="Search product" value="">
+                           name="search_input" placeholder="Search code" value="">
                     <button class="btn btn-primary btn-lg btn-block input-group-append" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
             </form>
 
-                <%-- de afisat poza --%>
+                <%-- de afisat bon --%>
             <br>
             <div class="container">
-                <div class="row h-25">
+                <div class="row bg-primary" style="font-size: 25px">
                     <div class="col-sm">
+                        checkbox
                     </div>
                     <div class="col-sm">
-                        <img class="card-img-top"
-                             src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}"
-                             alt=""/>
+                        numar bon
                     </div>
                     <div class="col-sm">
+                        pret total
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <input type="checkbox" name="receipt_ids" value="${receipt.id}"/>
+                    </div>
+                    <div class="col-sm">
+                        ${receipt.id}
+                    </div>
+                    <div class="col-sm">
+                        ${receipt.total}
                     </div>
                 </div>
             </div>
@@ -43,15 +55,13 @@
             <div class="container position-absolute bottom-0 start-0">
 
                 <form class="needs-validation" novalidate method="POST"
-                      action="${pageContext.request.contextPath}/ProcessSale">
+                      action="${pageContext.request.contextPath}/ManageReturn">
                     <input type="hidden" id="form2" name="form1" value="form2">
                     <div class="row border-5" style="font-size: 30px">
                         <div class="col col-8 fst-italic d-flex align-items-center w-75">
-                            <p>${product.name} </p>
                             <input type="hidden" id="productName" name="productName" value="${product.name}">
                         </div>
                         <div class="col col-4 text-center w-25 fst-italic">
-                            <p> ${product.price} lei/kg</p>
                         </div>
                         <input type="hidden" id="product-id" name="product-id" value="${product.product_id}">
                     </div>
@@ -59,20 +69,18 @@
                     <div class="container">
                         <div class="row fst-italic" style="font-size: 25px">
                             <div class="col">
-                                <label for="quantity">Quantity:</label>
-                                <input type="number" id="quantity" name="quantity" min="0" max="${product.quantity}"
-                                       style="width: 100px">
+
                             </div>
                         </div>
                         <br>
                         <div class="row" style="font-size: 25px">
                             <div class="col col-8 fst-italic d-flex align-items-center">
-                                <p>Quantity available: ${product.quantity} kg </p>
+
                             </div>
                             <div class="col col-4 text-center">
                                 <button class="btn btn-primary input-group-append" type="submit"
                                         style="border-radius: 50%; font-size: 50px">
-                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-refresh"></i>
                                 </button>
                             </div>
                         </div>
@@ -86,7 +94,7 @@
             <%-- afisare bon --%>
         <div class="col position-relative" style="background-color: #99ccff">
             <br>
-            <h2 class="text-center">Receipt</h2>
+            <h2 class="text-center">Receipt no. </h2>
 
             <div>
                 <c:if test="${not empty invoices}">
@@ -97,7 +105,7 @@
                                     ${status.index+1}.${productname}
                             </div>
                             <div class="col">
-                                ${productQuantity}X${product.price}
+                                    ${productQuantity}X${product.price}
                             </div>
                             <div class="col text-end">
                                 pret total
@@ -123,7 +131,7 @@
                     <div class="row text-center">
                         <div class="col-lg">
                             <button class="btn btn-primary" type="button" style="font-size: 40px;width: 100%">
-                                Submit
+                                Return All
                             </button>
                         </div>
                         <div class="col-lg">

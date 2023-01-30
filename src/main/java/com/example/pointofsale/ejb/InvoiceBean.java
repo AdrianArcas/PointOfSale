@@ -12,6 +12,7 @@ import java.util.Set;
 public class InvoiceBean implements Serializable {
     Set<Long> productIds=new HashSet<>();
 
+
     public Set<Long> getProductIds() {
         return productIds;
     }
@@ -19,4 +20,6 @@ public class InvoiceBean implements Serializable {
     public void setProductIds(Set<Long> productIds) {
         this.productIds = productIds;
     }
+
+
 }

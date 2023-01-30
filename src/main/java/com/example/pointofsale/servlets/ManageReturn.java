@@ -1,8 +1,9 @@
 package com.example.pointofsale.servlets;
 
 import com.example.pointofsale.common.ProductDto;
-import com.example.pointofsale.ejb.InvoiceBean;
+import com.example.pointofsale.common.ReceiptDto;
 import com.example.pointofsale.ejb.ProductBean;
+import com.example.pointofsale.ejb.ReceiptBean;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
@@ -11,41 +12,34 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+
 @DeclareRoles({"Cashier"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
         httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"Cashier"})})
-@WebServlet(name = "ProcessSale", value = "/ProcessSale")
-public class ProcessSale extends HttpServlet {
+@WebServlet(name = "ManageReturn", value = "/ManageReturn")
+public class ManageReturn extends HttpServlet {
     @Inject
     ProductBean productBean;
     @Inject
-    InvoiceBean invoiceBean;
+    ReceiptBean receiptBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (!invoiceBean.getProductIds().isEmpty()) {
-            Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
-            request.setAttribute("invoices", products);
-        }
-
-        request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String valid = request.getParameter("form1");
+        String[] receiptIdsAsString = request.getParameterValues("receipt_ids");
         if (valid.equals("form1")) {
-            String name = request.getParameter("search_input");
-            ProductDto product = productBean.findProductByName(name);
-            request.setAttribute("product", product);
-            if (!invoiceBean.getProductIds().isEmpty()) {
-                Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
-                request.setAttribute("invoices", products);
-            }
-            request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
+            Long id=Long.parseLong(request.getParameter("search_input"));
+
+            ReceiptDto receipt = receiptBean.findReceiptById(id);
+            request.setAttribute("receipt", receipt);
+            request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
 
         } else if (valid.equals("form2")) {
 
@@ -59,10 +53,11 @@ public class ProcessSale extends HttpServlet {
             if (productIdAsString != null) {
                 List<Long> productIds = new ArrayList<>();
                 productIds.add(Long.parseLong(productIdAsString));
-                invoiceBean.getProductIds().addAll(productIds);
+//                invoiceBean.getProductIds().addAll(productIds);
             }
+//            request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
+//            response.sendRedirect(request.getContextPath() + "/ProcessSale");
         }
-
-        response.sendRedirect(request.getContextPath() + "/ProcessSale");
+        response.sendRedirect(request.getContextPath() + "/ManageReturn");
     }
 }

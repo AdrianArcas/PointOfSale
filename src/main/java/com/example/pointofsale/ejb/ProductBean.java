@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
+
 @Stateless
 public class ProductBean {
     private static final Logger LOG = Logger.getLogger(ProductBean.class.getName());
@@ -137,5 +138,19 @@ public class ProductBean {
                 entityManager.createQuery("SELECT p.name FROM Product p WHERE p.product_id IN :productIds", String.class)
                         .setParameter("productIds", productIds).getResultList();
         return productnames;
+    }
+
+    public ProductDto findProductByName(String productName) {
+        LOG.info("findProductByName");
+        try {
+            List<Long> productIds =
+                    entityManager.createQuery("SELECT p.product_id FROM Product p WHERE p.name = :name", Long.class)
+                            .setParameter("name", productName).getResultList();
+            Product product = entityManager.find(Product.class, productIds.get(0));
+            ProductDto productDto = new ProductDto(product.getProduct_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getCategory(), product.getTva());
+            return productDto;
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.pointofsale.servlets;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.ejb.InvoiceBean;
 import com.example.pointofsale.ejb.ProductBean;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+@DeclareRoles({"Cashier"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"Cashier"})})
 @WebServlet(name = "ProcessSale", value = "/ProcessSale")
 public class ProcessSale extends HttpServlet {
     @Inject
@@ -22,11 +25,9 @@ public class ProcessSale extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        List<ProductDto> products=productBean.findAllProducts();
-//        request.setAttribute("products",products);
 
-        if(!invoiceBean.getProductIds().isEmpty()){
-            Collection<String> products=productBean.findProductnamesByIds(invoiceBean.getProductIds());
+        if (!invoiceBean.getProductIds().isEmpty()) {
+            Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
             request.setAttribute("invoices", products);
         }
 
@@ -35,14 +36,13 @@ public class ProcessSale extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String valid=request.getParameter("form1");
-        if(valid.equals("form1")){
+        String valid = request.getParameter("form1");
+        if (valid.equals("form1")) {
             Long id = Long.parseLong(request.getParameter("search_input"));
             ProductDto product = productBean.findProductById(id);
             request.setAttribute("product", product);
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
-        }
-        else if(valid.equals("form2")) {
+        } else if (valid.equals("form2")) {
 
             String productIdAsString = request.getParameter("product-id");
             if (productIdAsString != null) {

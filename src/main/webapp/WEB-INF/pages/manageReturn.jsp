@@ -24,27 +24,27 @@
 
                 <%-- de afisat bon --%>
             <br>
-            <div class="container">
-                <div class="row bg-primary" style="font-size: 25px">
-                    <div class="col-sm">
-                        checkbox
+            <div class="container border border-2 border-primary" style="background-color: #99ccff">
+                <div class="row bg-primary fst-italic" style="font-size: 25px">
+                    <div class="col col-1 border border-white" >
+
                     </div>
-                    <div class="col-sm">
-                        numar bon
+                    <div class="col col-6 border border-white">
+                        Number
                     </div>
-                    <div class="col-sm">
-                        pret total
+                    <div class="col col-5 border border-white">
+                        Total
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm">
-                        <input type="checkbox" name="receipt_ids" value="${receipt.id}"/>
+                <div class="row ">
+                    <div class="col col-1 border border-white d-flex justify-content-center">
+                        <input type="checkbox" class="ui-icon-check" name="receipt_ids" value="${receipt.id}"/>
                     </div>
-                    <div class="col-sm">
+                    <div class="col col-6 border border-white">
                         ${receipt.id}
                     </div>
-                    <div class="col-sm">
+                    <div class="col col-5 border border-white">
                         ${receipt.total}
                     </div>
                 </div>
@@ -57,21 +57,9 @@
                 <form class="needs-validation" novalidate method="POST"
                       action="${pageContext.request.contextPath}/ManageReturn">
                     <input type="hidden" id="form2" name="form1" value="form2">
-                    <div class="row border-5" style="font-size: 30px">
-                        <div class="col col-8 fst-italic d-flex align-items-center w-75">
-                            <input type="hidden" id="productName" name="productName" value="${product.name}">
-                        </div>
-                        <div class="col col-4 text-center w-25 fst-italic">
-                        </div>
-                        <input type="hidden" id="product-id" name="product-id" value="${product.product_id}">
-                    </div>
+
 
                     <div class="container">
-                        <div class="row fst-italic" style="font-size: 25px">
-                            <div class="col">
-
-                            </div>
-                        </div>
                         <br>
                         <div class="row" style="font-size: 25px">
                             <div class="col col-8 fst-italic d-flex align-items-center">

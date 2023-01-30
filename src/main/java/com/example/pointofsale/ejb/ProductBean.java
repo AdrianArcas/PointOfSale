@@ -153,4 +153,23 @@ public class ProductBean {
             throw new EJBException(ex);
         }
     }
+
+    public List<ProductDto> findAllLowStockProducts() {
+        LOG.info("findAllLowStockProducts");
+        try{
+            TypedQuery<Product> typedQuery = entityManager.createQuery("SELECT p FROM Product p WHERE p.quantity < 10", Product.class);
+            List<Product> products = typedQuery.getResultList();
+            return copyProductsToDto(products);
+
+        }catch(Exception ex){
+            throw new EJBException(ex);
+        }
+    }
+
+    public void restockProduct(Long productId, Integer quantity) {
+        LOG.info("restockProduct");
+        Product product = entityManager.find(Product.class, productId);
+        product.setQuantity(product.getQuantity() + quantity);
+
+    }
 }

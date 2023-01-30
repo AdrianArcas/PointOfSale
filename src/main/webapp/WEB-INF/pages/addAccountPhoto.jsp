@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Add account photo">
-    <h1>Add product photo</h1>
+    <h1>Add account photo</h1>
     <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data"
           action="${pageContext.request.contextPath}/AddAccountPhoto">
         <div class="row">

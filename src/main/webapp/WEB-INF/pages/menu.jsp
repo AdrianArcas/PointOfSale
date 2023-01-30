@@ -43,7 +43,7 @@
         <ul class="navbar-nav">
           <li>
             <c:if test="${pageContext.request.isUserInRole('Director') || pageContext.request.isUserInRole('Manager')}">
-            <a class="nav-link" href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/notification.jsp'?'active':''}" aria-current="page" href="${pageContext.request.contextPath}/notification.jsp">
+            <a class="nav-link" <%--href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/notification.jsp'?'active':''}"--%> aria-current="page" href="${pageContext.request.contextPath}/Notifications">
               <img src="<%=request.getContextPath()%>/images/notification.png" alt="Notification" width="38">
             </a>
             </c:if>

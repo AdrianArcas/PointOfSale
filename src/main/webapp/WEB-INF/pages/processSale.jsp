@@ -91,16 +91,19 @@
             <div>
                 <c:if test="${not empty invoices}">
                     <h2>Invoices</h2>
-                    <c:forEach var="productname" items="${invoices}" varStatus="status">
+                    <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
                             <div class="col">
-                                    ${status.index+1}.${productname}
+                                    ${status.index+1}.${invoice.key.name}
                             </div>
                             <div class="col">
-                                ${productQuantity}X${product.price}
+                                Quantity :  ${invoice.value}
+                            </div>
+                            <div class="col">
+                                Price : ${invoice.key.price} lei/kg
                             </div>
                             <div class="col text-end">
-                                pret total
+                                Total price: ${invoice.value * invoice.key.price }
                             </div>
                         </div>
 

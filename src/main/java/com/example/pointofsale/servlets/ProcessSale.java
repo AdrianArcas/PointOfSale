@@ -3,6 +3,7 @@ package com.example.pointofsale.servlets;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.ejb.InvoiceBean;
 import com.example.pointofsale.ejb.ProductBean;
+import com.example.pointofsale.entities.Product;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 @DeclareRoles({"Cashier"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
@@ -27,8 +29,9 @@ public class ProcessSale extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (!invoiceBean.getProductIds().isEmpty()) {
-            Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
-            request.setAttribute("invoices", products);
+
+            HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
+            request.setAttribute("invoices", IdsToQuantity);
         }
 
         request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
@@ -42,24 +45,19 @@ public class ProcessSale extends HttpServlet {
             ProductDto product = productBean.findProductByName(name);
             request.setAttribute("product", product);
             if (!invoiceBean.getProductIds().isEmpty()) {
-                Collection<String> products = productBean.findProductnamesByIds(invoiceBean.getProductIds());
-                request.setAttribute("invoices", products);
+                HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
+                request.setAttribute("invoices", IdsToQuantity);
             }
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
 
         } else if (valid.equals("form2")) {
 
-            String productIdAsString = request.getParameter("product-id");
+            Long productIdAsLong = Long.valueOf(request.getParameter("product-id"));
             Long quantity= Long.valueOf(request.getParameter("quantity"));
-            request.setAttribute("productQuantity", quantity);
-            String name = request.getParameter("productName");
-            ProductDto product2 = productBean.findProductByName(name);
-            request.setAttribute("product", product2);
-//            request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
-            if (productIdAsString != null) {
-                List<Long> productIds = new ArrayList<>();
-                productIds.add(Long.parseLong(productIdAsString));
-                invoiceBean.getProductIds().addAll(productIds);
+            ProductDto product = productBean.findProductById(productIdAsLong);
+
+            if (productIdAsLong != null) {
+                invoiceBean.addQuantityAndID(product,quantity);
             }
         }
 

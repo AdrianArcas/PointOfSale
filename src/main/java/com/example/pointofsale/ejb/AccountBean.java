@@ -29,7 +29,7 @@ public class AccountBean {
         newAccount.setUsername(username);
         newAccount.setEmail(email);
         newAccount.setPassword(passwordBean.convertToSha256(password));
-        newAccount.setIs_active(true);
+        newAccount.setIs_active(false);
         entityManager.persist(newAccount);
         assignGroupToUser(username, userGroup);
 
@@ -121,10 +121,9 @@ public class AccountBean {
                 photo.getFileContent());
     }
 
-    public Long getAccountIdByUsername(String username) {
-        LOG.info("getAccountIdByUsernam");
-        List<Account> Accounts = entityManager.createQuery("SELECT a FROM Account a where a.username = :username", Account.class)
-                .setParameter("username", username)
+    public Long getAccountIdByUsername(String username1) {
+        List<Account> Accounts = entityManager.createQuery("SELECT a FROM Account a where a.username = :username" , Account.class)
+                .setParameter("username", username1)
                 .getResultList();
         return  Accounts.get(0).getAccount_id();
     }

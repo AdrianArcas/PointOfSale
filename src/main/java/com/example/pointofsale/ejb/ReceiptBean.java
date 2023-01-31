@@ -38,7 +38,7 @@ public class ReceiptBean {
         List<ReceiptDto> receiptDtoList = new ArrayList<>();
 
         for (Receipt r : receipts) {
-            receiptDtoList.add(new ReceiptDto(r.getId(), r.getCashier_name(), r.getDate(), r.getPayment_method(), r.getTotal()));
+            receiptDtoList.add(new ReceiptDto(r.getId(), r.getCashier_name(), r.getDate(), r.getTotal()));
         }
         return receiptDtoList;
     }
@@ -48,7 +48,7 @@ public class ReceiptBean {
 
         Receipt receipt = entityManager.find(Receipt.class, receiptId);
 
-        ReceiptDto receiptDto = new ReceiptDto(receipt.getId(), receipt.getCashier_name(), receipt.getDate(), receipt.getPayment_method(), receipt.getTotal());
+        ReceiptDto receiptDto = new ReceiptDto(receipt.getId(), receipt.getCashier_name(), receipt.getDate(),  receipt.getTotal());
 
         return receiptDto;
     }

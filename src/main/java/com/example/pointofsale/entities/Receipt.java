@@ -11,7 +11,6 @@ public class Receipt {
     private Long id;
     private String cashier_name;
     private LocalDateTime date;
-    private String payment_method;
     private Double total;
     private Collection<ReceiptProductsItem> products;
 
@@ -43,15 +42,6 @@ public class Receipt {
         this.date = date;
     }
 
-
-    @Basic
-    public String getPayment_method() {
-        return payment_method;
-    }
-
-    public void setPayment_method(String payment_method) {
-        this.payment_method = payment_method;
-    }
 
     @Basic
     public Double getTotal() {

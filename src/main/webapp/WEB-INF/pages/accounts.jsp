@@ -12,6 +12,7 @@
                 </div>
             </div>
             <c:forEach var="account" items="${accounts}">
+                <c:if test="${account.is_active}">
                 <div class="col mb-3" style="height:238px">
                     <div class="card border border-primary rounded h-100 mb-">
                         <img class="card-img-top" src="${pageContext.request.contextPath}/AccountPhoto?account_id=${account.account_id}" height="130px" alt=""/>
@@ -31,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+                </c:if>
             </c:forEach>
         </div>
     </div>

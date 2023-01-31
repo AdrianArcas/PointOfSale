@@ -2,6 +2,7 @@ package com.example.pointofsale.ejb;
 
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.entities.Product;
+import com.example.pointofsale.entities.Receipt;
 import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
 
@@ -13,6 +14,7 @@ import java.util.*;
 public class InvoiceBean implements Serializable {
     /*    Set<Long> productIds=new HashSet<>();*/
     HashMap<ProductDto, Long> IdsToQuantity = new HashMap<ProductDto, Long>();
+
 
     public HashMap<ProductDto, Long> getIdsToQuantity() {
         return IdsToQuantity;
@@ -27,6 +29,7 @@ public class InvoiceBean implements Serializable {
     }
 
     public void addQuantityAndID(ProductDto product, Long quantity) {
+
         this.IdsToQuantity.put(product, quantity);
     }
 
@@ -41,6 +44,10 @@ public class InvoiceBean implements Serializable {
             total += intermediar;
         }
         return total;
+    }
+    public void ResetInvoice(){
+
+        this.IdsToQuantity.clear();
     }
 }
 

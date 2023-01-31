@@ -33,7 +33,14 @@ public class ManageReturn extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Double total = new Double(0);
 
+        if (!invoiceBean.getProductIds().isEmpty()) {
+            HashMap<ProductDto, Long> IdsToQuantity = invoiceBean.getIdsToQuantity();
+            total = invoiceBean.calcTotal(IdsToQuantity);
+            request.setAttribute("invoices", IdsToQuantity);
+        }
+        request.setAttribute("total",total);
         request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
     }
 

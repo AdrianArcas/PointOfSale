@@ -9,14 +9,13 @@ public class ReceiptDto {
     private Long id;
     private String cashier_name;
     private LocalDateTime date;
-    private String payment_method;
+
     private Double total;
 
-    public ReceiptDto(Long id, String cashier_name, LocalDateTime date, String payment_method, Double total) {
+    public ReceiptDto(Long id, String cashier_name, LocalDateTime date,  Double total) {
         this.id = id;
         this.cashier_name = cashier_name;
         this.date = date;
-        this.payment_method = payment_method;
         this.total = total;
     }
 
@@ -32,9 +31,6 @@ public class ReceiptDto {
         return date;
     }
 
-    public String getPayment_method() {
-        return payment_method;
-    }
 
     public Double getTotal() {
         return total;

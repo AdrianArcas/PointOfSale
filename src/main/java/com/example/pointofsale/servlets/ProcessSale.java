@@ -43,6 +43,7 @@ public class ProcessSale extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String valid = request.getParameter("form1");
+
         if (valid.equals("form1")) {
             String name = request.getParameter("search_input");
             ProductDto product = productBean.findProductByName(name);

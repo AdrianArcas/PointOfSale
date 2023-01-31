@@ -1,38 +1,42 @@
 package com.example.pointofsale.ejb;
 
-import com.example.pointofsale.common.NotificationDto;
-import com.example.pointofsale.common.ProductDto;
-import com.example.pointofsale.entities.Account;
+import com.example.pointofsale.common.DirectorNotificationDto;
 import com.example.pointofsale.entities.NotificationAccountsDirector;
-import com.example.pointofsale.entities.Product;
 import jakarta.ejb.EJBException;
+import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.UserTransaction;
 
+import javax.naming.InitialContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-public class NotificationBean {
+@Stateless
+public class DirectorNotificationBean {
 
     @Inject
     AccountBean accountBean;
 
     @PersistenceContext
     EntityManager entityManager;
-    private static final Logger LOG = Logger.getLogger(NotificationBean.class.getName());
+    private static final Logger LOG = Logger.getLogger(DirectorNotificationBean.class.getName());
 
     public void createNotification(Long whoAddedOrDeletedAccID , Long AddedOrDeletedAccID, String action) {
         LOG.info("createNotification");
         NotificationAccountsDirector newNotificatioon=new NotificationAccountsDirector();
-        newNotificatioon.setModified_or_added_account_id(whoAddedOrDeletedAccID);
+
+        newNotificatioon.setWho_modified_or_added_id(whoAddedOrDeletedAccID);
         newNotificatioon.setModified_or_added_account_id(AddedOrDeletedAccID);
         newNotificatioon.setAction(action);
+
         entityManager.persist(newNotificatioon);
     }
-    public List<NotificationDto> findAllNotifications(){
+    public List<DirectorNotificationDto> findAllNotifications(){
         LOG.info("findAllNotofications");
         try{
             TypedQuery<NotificationAccountsDirector> typedQuery = entityManager.createQuery("SELECT n FROM NotificationAccountsDirector n", NotificationAccountsDirector.class);
@@ -43,13 +47,13 @@ public class NotificationBean {
             throw new EJBException(ex);
         }
     }
-    private List<NotificationDto> copyNotificationsToDto(List<NotificationAccountsDirector> notifications) {
-        List<NotificationDto> notificationDtoList = new ArrayList<>();
+    private List<DirectorNotificationDto> copyNotificationsToDto(List<NotificationAccountsDirector> notifications) {
+        List<DirectorNotificationDto> directorNotificationDtoList = new ArrayList<>();
 
         for(NotificationAccountsDirector n : notifications){
-            notificationDtoList.add(new NotificationDto(n.getNotification_id(), accountBean.getAccountUsernameByID(n.getModified_or_added_account_id()), accountBean.getAccountUsernameByID(n.getWho_modified_or_added_id()),n.getAction()));
+            directorNotificationDtoList.add(new DirectorNotificationDto(n.getNotification_id(), accountBean.getAccountUsernameByID(n.getModified_or_added_account_id()), accountBean.getAccountUsernameByID(n.getWho_modified_or_added_id()),n.getAction()));
 
         }
-        return notificationDtoList;
+        return directorNotificationDtoList;
     }
 }

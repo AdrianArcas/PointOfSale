@@ -1,12 +1,12 @@
 package com.example.pointofsale.common;
 
-public class NotificationDto {
+public class DirectorNotificationDto {
     Long id;
     String modified_or_added_account_username;
     String who_modified_or_added_account_username;
     String action;
 
-    public NotificationDto(Long id, String modified_or_added_account_username, String who_modified_or_added_account_username, String action) {
+    public DirectorNotificationDto(Long id, String modified_or_added_account_username, String who_modified_or_added_account_username, String action) {
         this.id = id;
         this.modified_or_added_account_username = modified_or_added_account_username;
         this.who_modified_or_added_account_username = who_modified_or_added_account_username;

@@ -42,49 +42,55 @@
         </ul>
         <ul class="navbar-nav">
           <li>
-            <c:if test="${pageContext.request.isUserInRole('Director') || pageContext.request.isUserInRole('Manager')}">
-            <a class="nav-link" <%--href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/notification.jsp'?'active':''}"--%> aria-current="page" href="${pageContext.request.contextPath}/Notifications">
+            <c:if test="${pageContext.request.isUserInRole('Director')}">
+            <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/DirectorNotifications">
               <img src="<%=request.getContextPath()%>/images/notification.png" alt="Notification" width="38">
             </a>
+            </c:if>
+
+            <c:if test="${pageContext.request.isUserInRole('Manager')}">
+              <a class="nav-link"  aria-current="page" href="${pageContext.request.contextPath}/Notifications">
+                <img src="<%=request.getContextPath()%>/images/notification.png" alt="Notification" width="38">
+              </a>
             </c:if>
           </li>
           <li class="nav-item">
            <c:if test="${pageContext.request.isUserInRole('Director')}">
-            <a class="nav-link " href="${pageContext.request.contextPath}/Statistics" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+            <a class="nav-link " href="${pageContext.request.contextPath}/Statistics"  aria-current="page" >
               Statistics
             </a>
            </c:if>
           </li>
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Manager')}">
-              <a class="nav-link " href="${pageContext.request.contextPath}/Accounts" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+              <a class="nav-link " href="${pageContext.request.contextPath}/Accounts"  aria-current="page" >
                 Accounts
               </a>
             </c:if>
           </li>
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Manager')}">
-              <a class="nav-link " href="${pageContext.request.contextPath}/AddAccount" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+              <a class="nav-link " href="${pageContext.request.contextPath}/AddAccount"  aria-current="page" >
                 Add Account
               </a>
             </c:if>
           </li>
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Manager')}">
-              <a class="nav-link " href="${pageContext.request.contextPath}/AddProduct" <%--class="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/Statistics'?'active':''}"--%> aria-current="page" >
+              <a class="nav-link " href="${pageContext.request.contextPath}/AddProduct"  aria-current="page" >
                 Add Product
               </a>
             </c:if>
           </li>
           <li class="nav-item">
-<%--            <c:if test="${pageContext.request.isUserInRole('Cashier')}">--%>
-<%--              <a style="margin-right:10px;height: 36px" href="${pageContext.request.contextPath}/Sell" class="btn btn-primary btn-lg" type="submit">Sell</a>--%>
-<%--            </c:if>--%>
+            <c:if test="${pageContext.request.isUserInRole('Cashier')}">
+              <a style="margin-right:10px;height: 36px" href="${pageContext.request.contextPath}/ClearInvoice?page=sale" class="btn btn-primary btn-lg" type="submit">Sell</a>
+            </c:if>
           </li>
           <li class="nav-item">
-<%--          <c:if test="${pageContext.request.isUserInRole('Cashier')}">--%>
-<%--              <a style="height: 36px" href="${pageContext.request.contextPath}/Return" class="btn btn-primary btn-lg" type="submit">Return</a>--%>
-<%--          </c:if>--%>
+          <c:if test="${pageContext.request.isUserInRole('Cashier')}">
+              <a style="height: 36px" href="${pageContext.request.contextPath}/ClearInvoice?page=return" class="btn btn-primary btn-lg" type="submit">Return</a>
+          </c:if>
           </li>
           <li class="nav-item">
             <c:choose>

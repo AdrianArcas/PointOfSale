@@ -38,9 +38,7 @@
                 </div>
 
                 <div class="row ">
-                    <div class="col col-1 border border-white d-flex justify-content-center">
-                        <input type="checkbox" class="ui-icon-check" name="receipt_ids" value="${receipt.id}"/>
-                    </div>
+
                     <div class="col col-6 border border-white">
                         ${receipt.id}
                     </div>
@@ -57,7 +55,7 @@
                 <form class="needs-validation" novalidate method="POST"
                       action="${pageContext.request.contextPath}/ManageReturn">
                     <input type="hidden" id="form2" name="form1" value="form2">
-
+                    <input type="hidden" name="receipt_ids" value="${receipt.id}"/>
 
                     <div class="container">
                         <br>

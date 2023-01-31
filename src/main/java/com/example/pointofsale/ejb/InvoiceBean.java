@@ -18,6 +18,9 @@ public class InvoiceBean implements Serializable {
         return IdsToQuantity;
     }
 
+    public void setIdsToQuantity(HashMap<ProductDto, Long> idsToQuantity) {
+        IdsToQuantity = idsToQuantity;
+    }
 
     public Set<ProductDto> getProductIds() {
         return IdsToQuantity.keySet();

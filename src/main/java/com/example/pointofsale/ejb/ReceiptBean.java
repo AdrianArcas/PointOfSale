@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 @Stateless
 public class ReceiptBean {
-    private static final Logger LOG = Logger.getLogger(ProductBean.class.getName());
+    private static final Logger LOG = Logger.getLogger(ReceiptBean.class.getName());
 
     @PersistenceContext
     EntityManager entityManager;

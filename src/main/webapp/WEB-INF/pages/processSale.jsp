@@ -40,7 +40,7 @@
             <br>
 
                 <%-- form pentru adaugare produse in bon --%>
-            <div class="container position-absolute bottom-0 start-0">
+            <div class="container bottom-0 start-0">
 
                 <form class="needs-validation" novalidate method="POST"
                       action="${pageContext.request.contextPath}/ProcessSale">
@@ -88,7 +88,7 @@
             <br>
             <h2 class="text-center">Receipt</h2>
 
-            <div>
+            <div style="min-height: 53%;">
                 <c:if test="${not empty invoices}">
                     <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
@@ -112,7 +112,7 @@
             </div>
 
 
-            <div class="container position-absolute bottom-0 start-0">
+            <div class="container bottom-0 start-0">
 
                 <div class="row border-5" style="font-size: 25px;width: 100%">
                     <div class="col fst-italic fw-bold">

@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" name="category" placeholder="" value="${product.category}" required readonly>
+        <input type="text" class="form-control" id="category" name="category" placeholder="" value="${product.category.getName()}" required readonly>
         <div class="invalid-feedback">
           Category is required.
         </div>
@@ -54,4 +54,5 @@
     <input type="hidden" name="product_id" value="${product.product_id}"/>
     <button class="w-100 btn btn-primary btn-lg" type="submit">Save</button>
   </form>
+  <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/addProduct.jpg" alt="RestockPhoto" style="bottom: 5%" width="45%">
 </t:pageTemplate>

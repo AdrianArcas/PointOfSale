@@ -40,7 +40,7 @@ public class ManageReturn extends HttpServlet {
             total = invoiceBean.calcTotal(IdsToQuantity);
             request.setAttribute("invoices", IdsToQuantity);
         }
-        request.setAttribute("total",total);
+        request.setAttribute("total", total);
         request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
     }
 
@@ -48,8 +48,17 @@ public class ManageReturn extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String valid = request.getParameter("form1");
         String receiptId = request.getParameter("receipt_ids");
+//       exemplu cod ptr string de checkboxes ptr return
+//        String[] productIdsAsString = request.getParameterValues("product_ids");
+//        if(productIdsAsString!=null){
+//            List<Long> productIds=new ArrayList<>();
+//            for(String productIdAsString:productIdsAsString){
+//                productIds.add(Long.parseLong(productIdAsString));
+//            }
+//            productBean.deleteCarsByIds(carIds);
+//        }
         if (valid.equals("form1")) {
-            Long id=Long.parseLong(request.getParameter("search_input"));
+            Long id = Long.parseLong(request.getParameter("search_input"));
             ReceiptDto receipt = receiptBean.findReceiptById(id);
             request.setAttribute("receipt", receipt);
             request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
@@ -57,7 +66,7 @@ public class ManageReturn extends HttpServlet {
         } else if (valid.equals("form2")) {
             Long idReceipt = Long.parseLong(receiptId);
             if (idReceipt != null) {
-                HashMap<ProductDto,Long> productsAndQuantityById = receiptProductsItemBean.getProductsByReceiptId(idReceipt);
+                HashMap<ProductDto, Long> productsAndQuantityById = receiptProductsItemBean.getProductsByReceiptId(idReceipt);
                 invoiceBean.setIdsToQuantity(productsAndQuantityById);
             }
         }

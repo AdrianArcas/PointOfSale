@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:pageTemplate pageTitle="Process Sale">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -88,25 +88,29 @@
         <div class="col position-relative" style="background-color: #99ccff">
             <br>
             <h2 class="text-center">Receipt</h2>
+            <br>
 
             <div style="min-height: 65%;">
                 <c:if test="${not empty invoices}">
                     <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
-                            <div class="col">
-                                    ${status.index+1}.${invoice.key.name}
+                            <div class="col col-1 d-flex justify-content-center">
+                                    ${status.index+1}.
                             </div>
                             <div class="col">
-                                Quantity :  ${invoice.value}
+                                    ${invoice.key.name}
+                            </div>
+                            <div class="col">
+                                Quantity : ${invoice.value} kg
                             </div>
                             <div class="col">
                                 Price : ${invoice.key.price} lei/kg
                             </div>
-                            <div class="col text-end">
+                            <div class="col">
                                 Total price:
-                                    <%--${invoice.value * invoice.key.price}--%>
-                                <fmt:formatNumber type = "number"
-                                                  maxIntegerDigits = "3" value = "${invoice.value * invoice.key.price}" />
+                                <fmt:formatNumber type="number"
+                                                  maxIntegerDigits="3" value="${invoice.value * invoice.key.price}"/>
+                                lei
                             </div>
                         </div>
                         <br/>
@@ -120,8 +124,8 @@
 
                 <div class="row border-5" style="font-size: 25px;width: 100%">
                     <div class="col fst-italic fw-bold">
-                        <p>Total: <fmt:formatNumber type = "number"
-                                                    maxIntegerDigits = "3" value = "${total}" />
+                        <p>Total: <fmt:formatNumber type="number"
+                                                    maxIntegerDigits="3" value="${total}"/>
                         </p>
                     </div>
                 </div>

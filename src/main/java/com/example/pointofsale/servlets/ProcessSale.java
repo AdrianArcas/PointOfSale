@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
 @DeclareRoles({"Cashier"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
         httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"Cashier"})})
@@ -34,7 +35,7 @@ public class ProcessSale extends HttpServlet {
             total = invoiceBean.calcTotal(IdsToQuantity);
             request.setAttribute("invoices", IdsToQuantity);
         }
-        request.setAttribute("total",total);
+        request.setAttribute("total", total);
         request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
     }
 
@@ -53,17 +54,17 @@ public class ProcessSale extends HttpServlet {
                 total = invoiceBean.calcTotal(IdsToQuantity);
                 request.setAttribute("invoices", IdsToQuantity);
             }
-            request.setAttribute("total",total);
+            request.setAttribute("total", total);
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
 
         } else if (valid.equals("form2")) {
 
             Long productIdAsLong = Long.valueOf(request.getParameter("product-id"));
-            Long quantity= Long.valueOf(request.getParameter("quantity"));
+            Long quantity = Long.valueOf(request.getParameter("quantity"));
             ProductDto product = productBean.findProductById(productIdAsLong);
 
             if (productIdAsLong != null) {
-                invoiceBean.addQuantityAndID(product,quantity);
+                invoiceBean.addQuantityAndID(product, quantity);
             }
         }
 

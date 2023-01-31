@@ -5,7 +5,7 @@
 <t:pageTemplate pageTitle="Process Sale">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="row row-cols-2 border-5 position-relative" style="height: 92%;border-width: 5px;">
+    <div class="row row-cols-2 border-5 position-relative" style="height: 93%;border-width: 5px;">
 
         <div class="col position-relative">
                 <%-- search bar  --%>
@@ -90,7 +90,6 @@
 
             <div>
                 <c:if test="${not empty invoices}">
-                    <h2>Invoices</h2>
                     <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
                             <div class="col">
@@ -103,13 +102,13 @@
                                 Price : ${invoice.key.price} lei/kg
                             </div>
                             <div class="col text-end">
-                                Total price: ${invoice.value * invoice.key.price }
+                                Total price: ${invoice.value * invoice.key.price}
                             </div>
                         </div>
-
                         <br/>
                     </c:forEach>
                 </c:if>
+
             </div>
 
 
@@ -117,8 +116,7 @@
 
                 <div class="row border-5" style="font-size: 25px;width: 100%">
                     <div class="col fst-italic fw-bold">
-                        <p>Total: </p>
-                            <%-- suma calculata --%>
+                        <p>Total: <c:out value="${total}"/> </p>
                     </div>
                 </div>
 

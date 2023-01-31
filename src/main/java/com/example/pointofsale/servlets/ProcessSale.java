@@ -27,12 +27,15 @@ public class ProcessSale extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Double total = new Double(0);
 
         if (!invoiceBean.getProductIds().isEmpty()) {
-
-            HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
+            HashMap<ProductDto, Long> IdsToQuantity = invoiceBean.getIdsToQuantity();
+            total = invoiceBean.calcTotal(IdsToQuantity);
             request.setAttribute("invoices", IdsToQuantity);
         }
+        request.setAttribute("total",total);
+
 
         request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
     }
@@ -44,10 +47,19 @@ public class ProcessSale extends HttpServlet {
             String name = request.getParameter("search_input");
             ProductDto product = productBean.findProductByName(name);
             request.setAttribute("product", product);
+            Double total = new Double(0);
+
             if (!invoiceBean.getProductIds().isEmpty()) {
-                HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
+                HashMap<ProductDto, Long> IdsToQuantity = invoiceBean.getIdsToQuantity();
+                total = invoiceBean.calcTotal(IdsToQuantity);
                 request.setAttribute("invoices", IdsToQuantity);
             }
+            request.setAttribute("total",total);
+           /* if (!invoiceBean.getProductIds().isEmpty()) {
+                HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
+                request.setAttribute("invoices", IdsToQuantity);
+            }*/
+
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
 
         } else if (valid.equals("form2")) {

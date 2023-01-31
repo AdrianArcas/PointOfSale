@@ -7,6 +7,7 @@ import com.example.pointofsale.entities.*;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.jws.soap.SOAPBinding;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public class AccountBean {
     @Inject
     PasswordBean passwordBean;
+
     @PersistenceContext
     EntityManager entityManager;
     private static final Logger LOG = Logger.getLogger(AccountBean.class.getName());
@@ -134,5 +136,18 @@ public class AccountBean {
                 .setParameter("id", id)
                 .getResultList();
         return  Accounts.get(0).getUsername();
+    }
+
+    public void activateAccountByUsername(String username){
+        Account account = entityManager.find(Account.class, getAccountIdByUsername(username));
+        account.setIs_active(true);
+    }
+    public void deleteUserGroupByUsername(String username){
+        List<UserGroup> Groups = entityManager.createQuery("SELECT u FROM UserGroup u where u.username = :username" , UserGroup.class)
+                .setParameter("username", username)
+                .getResultList();
+        entityManager.remove(Groups.get(0));
+
+
     }
 }

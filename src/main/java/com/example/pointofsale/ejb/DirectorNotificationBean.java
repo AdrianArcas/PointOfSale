@@ -1,6 +1,7 @@
 package com.example.pointofsale.ejb;
 
 import com.example.pointofsale.common.DirectorNotificationDto;
+import com.example.pointofsale.entities.Account;
 import com.example.pointofsale.entities.NotificationAccountsDirector;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
@@ -10,6 +11,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.SystemException;
+import jakarta.transaction.Transactional;
 import jakarta.transaction.UserTransaction;
 
 import javax.naming.InitialContext;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 @Stateless
+@Transactional
 public class DirectorNotificationBean {
 
     @Inject
@@ -55,5 +58,11 @@ public class DirectorNotificationBean {
 
         }
         return directorNotificationDtoList;
+    }
+
+    public void deleteNotificationById(Long notification_id) {
+        LOG.info("deleteNotificationById");
+        NotificationAccountsDirector notification = entityManager.find(NotificationAccountsDirector.class, notification_id);
+        entityManager.remove(notification);
     }
 }

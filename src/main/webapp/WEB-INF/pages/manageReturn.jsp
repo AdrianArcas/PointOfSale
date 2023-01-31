@@ -1,11 +1,12 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:pageTemplate pageTitle="Manage Return">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="row row-cols-2 border-5 position-relative" style="height: 92%;border-width: 5px;">
+    <div class="row row-cols-2 border-5 position-relative" style="height: 93%;border-width: 5px;">
 
         <div class="col position-relative">
                 <%-- search bar  --%>
@@ -26,23 +27,19 @@
             <br>
             <div class="container border border-2 border-primary" style="background-color: #99ccff">
                 <div class="row bg-primary fst-italic" style="font-size: 25px">
-                    <div class="col col-1 border border-white" >
-
-                    </div>
                     <div class="col col-6 border border-white">
                         Number
                     </div>
-                    <div class="col col-5 border border-white">
+                    <div class="col col-6 border border-white">
                         Total
                     </div>
                 </div>
 
                 <div class="row ">
-
                     <div class="col col-6 border border-white">
                         ${receipt.id}
                     </div>
-                    <div class="col col-5 border border-white">
+                    <div class="col col-6 border border-white">
                         ${receipt.total}
                     </div>
                 </div>
@@ -80,36 +77,41 @@
             <%-- afisare bon --%>
         <div class="col position-relative" style="background-color: #99ccff">
             <br>
-            <h2 class="text-center">Receipt no. </h2>
+            <h2 class="text-center">Receipt</h2>
 
-            <div>
+            <div style="min-height: 65%;">
                 <c:if test="${not empty invoices}">
-                    <h2>Invoices</h2>
-                    <c:forEach var="productname" items="${invoices}" varStatus="status">
+                    <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
                             <div class="col">
-                                    ${status.index+1}.${productname}
+                                    ${status.index+1}.${invoice.key.name}
                             </div>
                             <div class="col">
-                                    ${productQuantity}X${product.price}
+                                Quantity :  ${invoice.value}
+                            </div>
+                            <div class="col">
+                                Price : ${invoice.key.price} lei/kg
                             </div>
                             <div class="col text-end">
-                                pret total
+                                Total price:
+                                <fmt:formatNumber type = "number"
+                                                  maxIntegerDigits = "3" value = "${invoice.value * invoice.key.price}" />
                             </div>
                         </div>
-
                         <br/>
                     </c:forEach>
                 </c:if>
+
             </div>
 
 
-            <div class="container position-absolute bottom-0 start-0">
+            <div class="container bottom-0 start-0">
 
                 <div class="row border-5" style="font-size: 25px;width: 100%">
                     <div class="col fst-italic fw-bold">
-                        <p>Total: </p>
-                            <%-- suma calculata --%>
+                        <p>Total: <fmt:formatNumber type = "number"
+                                                    maxIntegerDigits = "3" value = "${total}" />
+                        </p>
                     </div>
                 </div>
 

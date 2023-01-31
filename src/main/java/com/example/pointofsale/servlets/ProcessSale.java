@@ -35,8 +35,6 @@ public class ProcessSale extends HttpServlet {
             request.setAttribute("invoices", IdsToQuantity);
         }
         request.setAttribute("total",total);
-
-
         request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
     }
 
@@ -56,11 +54,6 @@ public class ProcessSale extends HttpServlet {
                 request.setAttribute("invoices", IdsToQuantity);
             }
             request.setAttribute("total",total);
-           /* if (!invoiceBean.getProductIds().isEmpty()) {
-                HashMap<ProductDto, Long> IdsToQuantity =invoiceBean.getIdsToQuantity();
-                request.setAttribute("invoices", IdsToQuantity);
-            }*/
-
             request.getRequestDispatcher("/WEB-INF/pages/processSale.jsp").forward(request, response);
 
         } else if (valid.equals("form2")) {

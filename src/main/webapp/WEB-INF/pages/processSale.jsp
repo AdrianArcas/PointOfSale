@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:pageTemplate pageTitle="Process Sale">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,7 +32,7 @@
                     <div class="col-sm">
                         <img class="card-img-top"
                              src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}"
-                             alt=""/>
+                             alt=" "/>
                     </div>
                     <div class="col-sm">
                     </div>
@@ -88,7 +89,7 @@
             <br>
             <h2 class="text-center">Receipt</h2>
 
-            <div style="min-height: 53%;">
+            <div style="min-height: 65%;">
                 <c:if test="${not empty invoices}">
                     <c:forEach var="invoice" items="${invoices}" varStatus="status">
                         <div class="row">
@@ -102,7 +103,10 @@
                                 Price : ${invoice.key.price} lei/kg
                             </div>
                             <div class="col text-end">
-                                Total price: ${invoice.value * invoice.key.price}
+                                Total price:
+                                    <%--${invoice.value * invoice.key.price}--%>
+                                <fmt:formatNumber type = "number"
+                                                  maxIntegerDigits = "3" value = "${invoice.value * invoice.key.price}" />
                             </div>
                         </div>
                         <br/>
@@ -116,7 +120,9 @@
 
                 <div class="row border-5" style="font-size: 25px;width: 100%">
                     <div class="col fst-italic fw-bold">
-                        <p>Total: <c:out value="${total}"/> </p>
+                        <p>Total: <fmt:formatNumber type = "number"
+                                                    maxIntegerDigits = "3" value = "${total}" />
+                        </p>
                     </div>
                 </div>
 

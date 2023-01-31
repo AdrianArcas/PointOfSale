@@ -131,7 +131,9 @@ public class ProductBean {
         Category categoryId = entityManager.find(Category.class, category);
         product.setCategory(categoryId);
         product.setTva(tva);
-        product.setPrice(((((double)tva + 100 )/ 100) *price));
+        BigDecimal bd = BigDecimal.valueOf((((double)tva + 100 )/ 100) *price);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        product.setPrice(bd.doubleValue());
     }
     public Collection<String> findProductnamesByIds(Collection<Long> productIds){
         List<String> productnames=

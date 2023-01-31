@@ -10,8 +10,8 @@
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-            <a class="nav-link ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/cashier.jsp'?'active':''}"
-               aria-current="page" href="${pageContext.request.contextPath}/Cashier">
+            <a class="nav-link ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/index.jsp'?'active':''}"
+               aria-current="page" href="${pageContext.request.contextPath}/cashier.jsp">
               <div>
                 <img src="<%=request.getContextPath()%>/images/user.png" alt=" " width="38">
                 Hello, Cashier!
@@ -84,12 +84,12 @@
           </li>
           <li class="nav-item">
             <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-              <a style="margin-right:10px;height: 36px" href="${pageContext.request.contextPath}/ClearInvoice?page=sale" class="btn btn-primary btn-lg" type="submit">Sell</a>
+              <a style="margin-right:10px;height: 38px" href="${pageContext.request.contextPath}/ClearInvoice?page=sale" class="btn btn-primary btn-lg" type="submit">Sell</a>
             </c:if>
           </li>
           <li class="nav-item">
           <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-              <a style="height: 36px" href="${pageContext.request.contextPath}/ClearInvoice?page=return" class="btn btn-primary btn-lg" type="submit">Return</a>
+              <a style="height: 38px" href="${pageContext.request.contextPath}/ClearInvoice?page=return" class="btn btn-primary btn-lg" type="submit">Return</a>
           </c:if>
           </li>
           <li class="nav-item">

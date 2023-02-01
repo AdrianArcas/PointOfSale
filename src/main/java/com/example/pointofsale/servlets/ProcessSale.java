@@ -70,6 +70,9 @@ public class ProcessSale extends HttpServlet {
             if (productIdAsLong != null) {
                 invoiceBean.addQuantityAndID(product, quantity);
             }
+            if(invoiceBean.getIdsToQuantity().containsKey(product)){
+                invoiceBean.substractQuantity(product,quantity);
+            }
         }
 
         response.sendRedirect(request.getContextPath() + "/ProcessSale");

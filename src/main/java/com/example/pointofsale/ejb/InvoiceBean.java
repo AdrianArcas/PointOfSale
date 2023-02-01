@@ -5,6 +5,9 @@ import com.example.pointofsale.entities.Product;
 import com.example.pointofsale.entities.Receipt;
 import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 import java.io.Serializable;
 import java.util.*;
@@ -12,7 +15,9 @@ import java.util.*;
 @Stateful
 @SessionScoped
 public class InvoiceBean implements Serializable {
-    /*    Set<Long> productIds=new HashSet<>();*/
+
+    @PersistenceContext
+    EntityManager entityManager;
     HashMap<ProductDto, Long> IdsToQuantity = new HashMap<ProductDto, Long>();
 
 
@@ -45,9 +50,25 @@ public class InvoiceBean implements Serializable {
         }
         return total;
     }
-    public void ResetInvoice(){
+    public void ResetInvoiceSell(){
+
+        for (ProductDto p: this.IdsToQuantity.keySet()){
+            Product product=entityManager.find(Product.class, p.getProduct_id());
+            product.setQuantity((int) (product.getQuantity()+this.IdsToQuantity.get(p)));
+        }
+        this.IdsToQuantity.clear();
+
+
+    }
+
+    public void ResetInvoiceReturn(){
 
         this.IdsToQuantity.clear();
+    }
+
+    public void substractQuantity(ProductDto p, Long quantity){
+        Product product=entityManager.find(Product.class, p.getProduct_id());
+        product.setQuantity((int) (product.getQuantity()-quantity));
     }
 }
 

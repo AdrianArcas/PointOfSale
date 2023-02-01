@@ -59,7 +59,7 @@
             <div class="container bottom-0 start-0">
 
                 <form class="needs-validation" novalidate method="POST"
-                      action="${pageContext.request.contextPath}/ManageReturn">
+                      action="${pageContext.request.contextPath}/ManageReturn?receipt_id=${receipt.id}">
                     <input type="hidden" id="form2" name="form1" value="form2">
                     <input type="hidden" name="receipt_ids" value="${receipt.id}"/>
 
@@ -91,9 +91,13 @@
             <br>
 
             <form class="needs-validation" novalidate method="POST"
-                  action="${pageContext.request.contextPath}/ManageReturn">
+                  action="${pageContext.request.contextPath}/ManageReturn?receipt_id=${receipt.id}">
                 <input type="hidden" id="form3" name="form1" value="form3">
-                <input type="hidden" name="receipt_id" value="${receipt.id}">
+                <input type="hidden" name="receipt_id"  value="${receipt.id}">
+                <div>
+                        ${receipt.id}
+                </div>
+
                 <div style="min-height: 65%;">
                     <c:if test="${not empty invoices}">
                         <c:forEach var="invoice" items="${invoices}" varStatus="status">

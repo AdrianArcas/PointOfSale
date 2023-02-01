@@ -49,7 +49,7 @@ public class ManageReturn extends HttpServlet {
         String valid = request.getParameter("form1");
         String receiptId = request.getParameter("receipt_ids");
 //       exemplu cod ptr string de checkboxes ptr return
-        String[] productIdsAsString = request.getParameterValues("product_ids");
+        String[] productIdsAsString =  request.getParameterValues("products_ids");
 
         if (valid.equals("form1")) {
             try {
@@ -66,19 +66,26 @@ public class ManageReturn extends HttpServlet {
 
         } else if (valid.equals("form2")) {
             Long idReceipt = Long.parseLong(receiptId);
-            if (idReceipt != null) {
+                 if (idReceipt != null) {
                 HashMap<ProductDto, Long> productsAndQuantityById = receiptProductsItemBean.getProductsByReceiptId(idReceipt);
                 invoiceBean.setIdsToQuantity(productsAndQuantityById);
+                invoiceBean.setRecipeID(idReceipt);
+                if (!invoiceBean.getProductIds().isEmpty()) {
+                    HashMap<ProductDto, Long> IdsToQuantity = invoiceBean.getIdsToQuantity();
+                    request.setAttribute("invoices", IdsToQuantity);
+                }
+
             }
 
-        } else if (valid.equals("form3")) {
 
+        } else if (valid.equals("form3")) {
             if (productIdsAsString != null) {
                 List<Long> productIds = new ArrayList<>();
                 for (String productIdAsString : productIdsAsString) {
                     productIds.add(Long.parseLong(productIdAsString));
                 }
-                invoiceBean.returnProducts(productIds, Long.parseLong(receiptId));
+                invoiceBean.returnProducts(productIds, Long.valueOf(invoiceBean.getRecipeID()));
+
             }
         }
         response.sendRedirect(request.getContextPath() + "/ManageReturn");

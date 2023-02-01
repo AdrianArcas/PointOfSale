@@ -21,6 +21,23 @@ public class InvoiceBean implements Serializable {
     EntityManager entityManager;
     HashMap<ProductDto, Long> IdsToQuantity = new HashMap<ProductDto, Long>();
 
+    Long recipeID;
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public Long getRecipeID() {
+        return recipeID;
+    }
+
+    public void setRecipeID(Long recipeID) {
+        this.recipeID = recipeID;
+    }
 
     public HashMap<ProductDto, Long> getIdsToQuantity() {
         return IdsToQuantity;
@@ -90,6 +107,7 @@ public class InvoiceBean implements Serializable {
     public void returnProducts(List<Long> productIds, Long receiptId) {
 
         List receiptProductsItem=new ArrayList<>();
+
         for (ProductDto p: this.IdsToQuantity.keySet()){
 
             for (Long productId: productIds) {
@@ -101,9 +119,14 @@ public class InvoiceBean implements Serializable {
                             .setParameter("receiptId",receiptId)
                             .setParameter("quantity",this.IdsToQuantity.get(p))
                             .getResultList();
+
                 }
             }
             entityManager.remove(receiptProductsItem.get(0));
+
+            //de scazut din total
+            //si de adaugat cantitate
+            //si de sters din invoice
         }
 
     }

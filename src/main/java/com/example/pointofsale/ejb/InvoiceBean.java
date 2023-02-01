@@ -6,6 +6,7 @@ import com.example.pointofsale.entities.Receipt;
 import com.example.pointofsale.entities.ReceiptProductsItem;
 import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -104,8 +105,8 @@ public class InvoiceBean implements Serializable {
         product.setQuantity((int) (product.getQuantity()+quantity));
     }
 
-    public void returnProducts(List<Long> productIds, Long receiptId) {
-
+    public void returnProducts(List<Long> productIds) {
+        Receipt receipt =entityManager.find(Receipt.class,this.recipeID);
         List receiptProductsItem=new ArrayList<>();
 
         for (ProductDto p: this.IdsToQuantity.keySet()){
@@ -116,17 +117,19 @@ public class InvoiceBean implements Serializable {
                      receiptProductsItem=entityManager.createQuery
                             ("SELECT r FROM ReceiptProductsItem r WHERE r.product_id=:id and r.receipt.id=:receiptId and r.quantity=:quantity")
                             .setParameter("id", productId)
-                            .setParameter("receiptId",receiptId)
+                            .setParameter("receiptId",this.recipeID)
                             .setParameter("quantity",this.IdsToQuantity.get(p))
                             .getResultList();
 
+                     Product product =entityManager.find(Product.class,p.getProduct_id());
+                     product.setQuantity((int) (product.getQuantity()+this.IdsToQuantity.get(p)));
+                     receipt.setTotal(receipt.getTotal()-this.IdsToQuantity.get(p)*p.getPrice());
+
                 }
+
             }
             entityManager.remove(receiptProductsItem.get(0));
 
-            //de scazut din total
-            //si de adaugat cantitate
-            //si de sters din invoice
         }
 
     }

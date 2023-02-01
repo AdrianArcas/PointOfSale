@@ -84,8 +84,8 @@ public class ManageReturn extends HttpServlet {
                 for (String productIdAsString : productIdsAsString) {
                     productIds.add(Long.parseLong(productIdAsString));
                 }
-                invoiceBean.returnProducts(productIds, Long.valueOf(invoiceBean.getRecipeID()));
-
+                invoiceBean.returnProducts(productIds);
+                invoiceBean.ResetInvoiceSell();
             }
         }
         response.sendRedirect(request.getContextPath() + "/ManageReturn");

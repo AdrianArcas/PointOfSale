@@ -91,12 +91,8 @@
             <br>
 
             <form class="needs-validation" novalidate method="POST"
-                  action="${pageContext.request.contextPath}/ManageReturn?receipt_id=${receipt.id}">
+                  action="${pageContext.request.contextPath}/ManageReturn">
                 <input type="hidden" id="form3" name="form1" value="form3">
-                <input type="hidden" name="receipt_id"  value="${receipt.id}">
-                <div>
-                        ${receipt.id}
-                </div>
 
                 <div style="min-height: 65%;">
                     <c:if test="${not empty invoices}">

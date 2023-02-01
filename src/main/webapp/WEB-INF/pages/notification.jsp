@@ -17,7 +17,7 @@
                 <img class="card-img-top" src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}" height="130px" alt=""/>
                 <div class="card-body p-0">
                     <h4 class="card-title text-center">${product.name}</h4>
-                    <b>Cantitate: ${product.quantity}</b>
+                    <b>Quantity: ${product.quantity}</b>
                     <div class="d-flex flex-row d-highlight text-center">
                         <a href="${pageContext.request.contextPath}/RestockProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 14px" role="button"><b>Restock</b></a>
                     </div>

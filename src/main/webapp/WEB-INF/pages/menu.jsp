@@ -57,14 +57,7 @@
                             </a>
                         </c:if>
                     </li>
-                    <li class="nav-item">
-                        <c:if test="${pageContext.request.isUserInRole('Director')}">
-                            <a class="nav-link " href="${pageContext.request.contextPath}/Statistics"
-                               aria-current="page">
-                                Statistics
-                            </a>
-                        </c:if>
-                    </li>
+
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Manager')}">
                             <a class="nav-link " href="${pageContext.request.contextPath}/Accounts" aria-current="page">

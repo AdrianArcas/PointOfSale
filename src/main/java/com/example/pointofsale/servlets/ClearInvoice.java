@@ -1,13 +1,17 @@
 package com.example.pointofsale.servlets;
 
 import com.example.pointofsale.ejb.InvoiceBean;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-
+@DeclareRoles({"Manager", "Cashier","Director"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Cashier"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
+                {"Cashier"})})
 @WebServlet(name = "ClearInvoice", value = "/ClearInvoice")
 public class ClearInvoice extends HttpServlet {
     @Inject

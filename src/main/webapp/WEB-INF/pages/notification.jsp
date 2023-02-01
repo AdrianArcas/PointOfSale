@@ -14,7 +14,7 @@
                     <h4 class="card-title text-center">${product.name}</h4>
                     <b>Cantitate: ${product.quantity}</b>
                     <div class="d-flex flex-row d-highlight text-center">
-                        <a href="${pageContext.request.contextPath}/RestockProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 10px" role="button"><b>Restock</b></a>
+                        <a href="${pageContext.request.contextPath}/RestockProduct?product_id=${product.product_id}" class="btn btn-warning btn-lg rounded-0 flex-fill" style="font-size: 14px" role="button"><b>Restock</b></a>
                     </div>
                 </div>
             </div>

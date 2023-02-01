@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="EditProduct">
-  <h1>Edit Product</h1>
+  <h1>Restock Product</h1>
   <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/RestockProduct">
     <div class="row">
       <div class="col-md-6 mb-3">
@@ -35,7 +35,10 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" name="category" placeholder="" value="${product.category.getName()}" required readonly>
+        <select class="form-select custom-select d-block" id="category" name="category" value="${product.category.getName()}" required>
+          <option value="1">Vegetable</option>
+          <option value="2">Fruit</option>
+        </select>
         <div class="invalid-feedback">
           Category is required.
         </div>
@@ -52,7 +55,7 @@
     </div>
     <hr class="mb-4">
     <input type="hidden" name="product_id" value="${product.product_id}"/>
-    <button class="w-100 btn btn-primary btn-lg" type="submit">Save</button>
+    <button class="btn btn-primary btn-lg" type="submit">Save</button>
   </form>
-  <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/addProduct.jpg" alt="RestockPhoto" style="bottom: 5%" width="45%">
+  <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/products.jpg" alt="Addproduct" style="bottom: 15%" width="43%">
 </t:pageTemplate>

@@ -11,10 +11,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse" style="font-family: 'Lora', cursive">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
+                    <li class="nav-item p-0">
                         <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-                            <div class="text-light">
-                                <img src="<%=request.getContextPath()%>/images/user.png" alt=" " width="38">
+                            <div class="text-light" style="color: #C1D1FC!important">
+                                <img src="<%=request.getContextPath()%>/images/user.png" style="color: #C1D1FC" alt=" " width="38">
                                 Hello, Cashier!
                             </div>
                             </a>
@@ -22,10 +22,7 @@
                     </li>
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Director')}">
-                            <a class="nav-link"
-                               href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/director.jsp'?'active':''}"
-                               aria-current="page" href="${pageContext.request.contextPath}/director.jsp">
-                                <div>
+                                <div class="text-light" style="color: #C1D1FC!important">
                                     <img src="<%=request.getContextPath()%>/images/director.png" alt=" " width="38">
                                     Hello, Director!
                                 </div>
@@ -34,10 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Manager')}">
-                            <a class="nav-link"
-                               href="${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/"))eq'/manager.jsp'?'active':''}"
-                               aria-current="page" href="${pageContext.request.contextPath}/manager.jsp">
-                                <div>
+                                <div class="text-light" style="color: #C1D1FC!important">
                                     <img src="<%=request.getContextPath()%>/images/manager.png" alt=" " width="38">
                                     Hello, Manager!
                                 </div>
@@ -46,9 +40,9 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li>
+                    <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Director')}">
-                            <a class="nav-link" aria-current="page"
+                            <a class="nav-link p-0" aria-current="page"
                                href="${pageContext.request.contextPath}/DirectorNotifications">
                                 <img src="<%=request.getContextPath()%>/images/notification.png" alt="Notification"
                                      width="38">
@@ -56,7 +50,7 @@
                         </c:if>
 
                         <c:if test="${pageContext.request.isUserInRole('Manager')}">
-                            <a class="nav-link" aria-current="page"
+                            <a class="nav-link p-0" aria-current="page"
                                href="${pageContext.request.contextPath}/Notifications">
                                 <img src="<%=request.getContextPath()%>/images/notification.png" alt="Notification"
                                      width="38">
@@ -96,15 +90,15 @@
                     </li>
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-                            <a style="margin-right:10px;height: 42px"
+                            <a
                                href="${pageContext.request.contextPath}/ClearInvoice?page=sale"
-                               class="btn btn-primary btn-lg" type="submit">Sell</a>
+                               class="nav-link" type="submit">Sell</a>
                         </c:if>
                     </li>
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('Cashier')}">
-                            <a style="height: 42px" href="${pageContext.request.contextPath}/ClearInvoice?page=return"
-                               class="btn btn-primary btn-lg" type="submit">Return</a>
+                           <a href="${pageContext.request.contextPath}/ClearInvoice?page=return"
+                                  class="nav-link" type="submit">Return</a>
                         </c:if>
                     </li>
                     <li class="nav-item">

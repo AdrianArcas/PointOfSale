@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="category">Category</label>
-                <select class="form-select custom-select d-block w-25" id="category" name="category" required>
+                <select class="form-select custom-select d-block" id="category" name="category" required>
                     <option value="1">Vegetable</option>
                     <option value="2">Fruit</option>
                 </select>
@@ -55,6 +55,7 @@
         </div>
         <hr class="mb-4">
         <input type="hidden" name="product_id" value="${product.product_id}"/>
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Save</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
     </form>
+    <img class="position-absolute mt-3 end-0" src="${pageContext.request.contextPath}/images/editProduct.jpg" alt="Addproduct" style="bottom: 15%" width="50%">
 </t:pageTemplate>

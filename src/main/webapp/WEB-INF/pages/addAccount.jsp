@@ -36,7 +36,7 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="user_groups">UserGroup</label>
-          <select class="custom-select d-block w-100" id="user_groups" name="user_group" required>
+          <select class="form-select custom-select d-block" id="user_groups" name="user_group" required>
             <c:forEach var="user_group" items="${userGroups}" varStatus="status">
               <option value="${user_group}">${user_group}</option>
             </c:forEach>

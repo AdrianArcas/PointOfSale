@@ -2,13 +2,17 @@ package com.example.pointofsale.servlets;
 
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.ejb.ProductBean;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-
+@DeclareRoles({"Manager", "Cashier","Director"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Manager"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
+                {"Manager"})})
 @MultipartConfig
 @WebServlet(name = "AddProductPhoto", value = "/AddProductPhoto")
 public class AddProductPhoto extends HttpServlet {

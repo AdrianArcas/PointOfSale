@@ -59,7 +59,6 @@ public class InvoiceBean implements Serializable {
         }
         this.IdsToQuantity.clear();
 
-
     }
 
     public void ResetInvoiceReturn(){
@@ -81,7 +80,31 @@ public class InvoiceBean implements Serializable {
             newReceiptProductItem.setReceipt(receipt.get(0));
             entityManager.persist(newReceiptProductItem);
         }
+    }
 
+    public void addQuantity(ProductDto p, Long quantity){
+        Product product=entityManager.find(Product.class, p.getProduct_id());
+        product.setQuantity((int) (product.getQuantity()+quantity));
+    }
+
+    public void returnProducts(List<Long> productIds, Long receiptId) {
+
+        List receiptProductsItem=new ArrayList<>();
+        for (ProductDto p: this.IdsToQuantity.keySet()){
+
+            for (Long productId: productIds) {
+
+                if(productId.equals(p.getProduct_id())){
+                     receiptProductsItem=entityManager.createQuery
+                            ("SELECT r FROM ReceiptProductsItem r WHERE r.product_id=:id and r.receipt.id=:receiptId and r.quantity=:quantity")
+                            .setParameter("id", productId)
+                            .setParameter("receiptId",receiptId)
+                            .setParameter("quantity",this.IdsToQuantity.get(p))
+                            .getResultList();
+                }
+            }
+            entityManager.remove(receiptProductsItem.get(0));
+        }
 
     }
 }

@@ -46,7 +46,10 @@
                             ${receipt.id}
                     </div>
                     <div class="col col-6 border border-white">
-                            ${receipt.total}
+                        <fmt:formatNumber type="number"
+                                          maxIntegerDigits="3"
+                                          value="${receipt.total}"/>
+
                     </div>
                 </div>
             </div>
@@ -87,59 +90,69 @@
             <h2 class="text-center">Receipt</h2>
             <br>
 
-            <div style="min-height: 65%;">
-                <c:if test="${not empty invoices}">
-                    <c:forEach var="invoice" items="${invoices}" varStatus="status">
-                        <div class="row">
-                            <div class="col col-1 d-flex justify-content-center">
-                                <input type="checkbox" name="products_ids" value="${status.index+1}"/>
-                            </div>
-                            <div class="col">
-                                    ${invoice.key.name}
-                            </div>
-                            <div class="col">
-                                Quantity : ${invoice.value} kg
-                            </div>
-                            <div class="col">
-                                Price : ${invoice.key.price} lei/kg
-                            </div>
-                            <div class="col">
-                                Total price:
-                                <fmt:formatNumber type="number"
-                                                  maxIntegerDigits="3" value="${invoice.value * invoice.key.price}"/>
-                                lei
-                            </div>
-                        </div>
-                        <br/>
-                    </c:forEach>
-                </c:if>
+            <form class="needs-validation" novalidate method="POST"
+                  action="${pageContext.request.contextPath}/ManageReturn">
+                <input type="hidden" id="form3" name="form1" value="form3">
+                <input type="hidden" name="receipt_id" value="${receipt.id}">
+                <div style="min-height: 65%;">
+                    <c:if test="${not empty invoices}">
+                        <c:forEach var="invoice" items="${invoices}" varStatus="status">
+                            <div class="row">
+                                <div class="col col-1 d-flex justify-content-center">
+                                    <input type="checkbox" name="products_ids" value="${invoice.key.product_id}"/>
 
-            </div>
+                                </div>
+<%--                                <div class="col col-1 d-flex justify-content-center">--%>
+<%--                                   ${invoice.key.product_id}--%>
 
+<%--                                </div>--%>
+                                <div class="col">
+                                        ${invoice.key.name}
+                                </div>
+                                <div class="col">
+                                    Quantity : ${invoice.value} kg
+                                </div>
+                                <div class="col">
+                                    Price : ${invoice.key.price} lei/kg
+                                </div>
+                                <div class="col">
+                                    Total price:
+                                    <fmt:formatNumber type="number"
+                                                      maxIntegerDigits="3"
+                                                      value="${invoice.value * invoice.key.price}"/>
+                                    lei
+                                </div>
+                            </div>
+                            <br/>
+                        </c:forEach>
+                    </c:if>
 
-            <div class="container bottom-0 start-0">
-
-                <div class="row border-5" style="font-size: 25px;width: 100%">
-                    <div class="col fst-italic fw-bold">
-                        <p>Total: <fmt:formatNumber type="number"
-                                                    maxIntegerDigits="3" value="${total}"/>
-                        </p>
-                    </div>
                 </div>
 
-                <div class="container">
-                    <div class="row text-center">
-                        <div class="col-lg">
-                            <button class="btn btn-primary" type="button" style="font-size: 40px;width: 100%">
-                                Return
-                            </button>
+
+                <div class="container bottom-0 start-0">
+
+                    <div class="row border-5" style="font-size: 25px;width: 100%">
+                        <div class="col fst-italic fw-bold">
+                            <p>Total: <fmt:formatNumber type="number"
+                                                        maxIntegerDigits="3" value="${total}"/>
+                            </p>
                         </div>
-
                     </div>
+
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-lg">
+                                <button class="btn btn-primary" type="submit" style="font-size: 40px;width: 100%">
+                                    Return
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-
-            </div>
-
+            </form>
         </div>
 
     </div>

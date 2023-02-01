@@ -32,7 +32,6 @@ public class ReceiptProductsItemBean {
         try {
             TypedQuery<ReceiptProductsItem> typedQuery = entityManager.createQuery("SELECT r FROM ReceiptProductsItem r", ReceiptProductsItem.class);
             List<ReceiptProductsItem> receipts = typedQuery.getResultList();
-            receipts.get(0).getReceipt().getId();
             return copyReceiptProductsToDto(receipts);
 
         } catch (Exception ex) {
@@ -66,8 +65,9 @@ public class ReceiptProductsItemBean {
        List<ReceiptProductsItemDto> allPaidProducts = findAllReceiptProducts();
        for(ReceiptProductsItemDto p : allPaidProducts) {
            Long productId = p.getReceipt().getId();
-           if (productId.equals(id))
+           if (productId.equals(id)) {
                productsQuantity.put(productBean.findProductById(Long.valueOf(p.getProduct_id())), Long.valueOf(p.getQuantity()));
+           }
        }
       return  productsQuantity;
     }

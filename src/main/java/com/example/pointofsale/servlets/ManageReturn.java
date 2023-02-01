@@ -49,24 +49,18 @@ public class ManageReturn extends HttpServlet {
         String valid = request.getParameter("form1");
         String receiptId = request.getParameter("receipt_ids");
 //       exemplu cod ptr string de checkboxes ptr return
-//        String[] productIdsAsString = request.getParameterValues("product_ids");
-//        if(productIdsAsString!=null){
-//            List<Long> productIds=new ArrayList<>();
-//            for(String productIdAsString:productIdsAsString){
-//                productIds.add(Long.parseLong(productIdAsString));
-//            }
-//            productBean.deleteCarsByIds(carIds);
-//        }
+        String[] productIdsAsString = request.getParameterValues("product_ids");
+
         if (valid.equals("form1")) {
-            try{
-            Long id = Long.parseLong(request.getParameter("search_input"));
+            try {
+                Long id = Long.parseLong(request.getParameter("search_input"));
                 ReceiptDto receipt = receiptBean.findReceiptById(id);
                 if (receipt == null) {
                     request.setAttribute("message", "No receipt found.");
                 }
                 request.setAttribute("receipt", receipt);
                 request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 request.setAttribute("message", "No receipt found.");
             }
 
@@ -75,6 +69,16 @@ public class ManageReturn extends HttpServlet {
             if (idReceipt != null) {
                 HashMap<ProductDto, Long> productsAndQuantityById = receiptProductsItemBean.getProductsByReceiptId(idReceipt);
                 invoiceBean.setIdsToQuantity(productsAndQuantityById);
+            }
+
+        } else if (valid.equals("form3")) {
+
+            if (productIdsAsString != null) {
+                List<Long> productIds = new ArrayList<>();
+                for (String productIdAsString : productIdsAsString) {
+                    productIds.add(Long.parseLong(productIdAsString));
+                }
+                invoiceBean.returnProducts(productIds, Long.parseLong(receiptId));
             }
         }
         response.sendRedirect(request.getContextPath() + "/ManageReturn");

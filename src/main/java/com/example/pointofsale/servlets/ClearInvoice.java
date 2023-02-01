@@ -18,13 +18,17 @@ public class ClearInvoice extends HttpServlet {
     InvoiceBean invoiceBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        invoiceBean.ResetInvoice();
+
         String page=request.getParameter("page");
         if(page.equals("sale")){
+            invoiceBean.ResetInvoiceReturn();
             response.sendRedirect(request.getContextPath() + "/ProcessSale");
             return;
         }
+        if(page.equals("return")){
+            invoiceBean.ResetInvoiceSell();
             response.sendRedirect(request.getContextPath() + "/ManageReturn");
+        }
     }
 
     @Override

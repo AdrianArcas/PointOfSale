@@ -44,8 +44,12 @@ public class ProcessSale extends HttpServlet {
         String valid = request.getParameter("form1");
 
         if (valid.equals("form1")) {
+
             String name = request.getParameter("search_input");
             ProductDto product = productBean.findProductByName(name);
+            if (product == null) {
+                request.setAttribute("message", "No product found.");
+            }
             request.setAttribute("product", product);
             Double total = new Double(0);
 
@@ -65,6 +69,9 @@ public class ProcessSale extends HttpServlet {
 
             if (productIdAsLong != null) {
                 invoiceBean.addQuantityAndID(product, quantity);
+            }
+            if(invoiceBean.getIdsToQuantity().containsKey(product)){
+                invoiceBean.substractQuantity(product,quantity);
             }
         }
 

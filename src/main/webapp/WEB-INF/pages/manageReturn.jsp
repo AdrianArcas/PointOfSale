@@ -16,10 +16,16 @@
                 <input type="hidden" id="form1" name="form1" value="form1">
                 <div class="input-group " style="height: 50px">
                     <input type="text" class="form-control border border-2 border-primary" id="search_input"
-                           name="search_input" placeholder="Search code" value="">
+                           name="search_input" placeholder="Search code" value="" required>
                     <button class="btn btn-primary btn-lg btn-block input-group-append" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
+                    <div class="invalid-feedback">
+                        Receipt code is required.
+                    </div>
+                </div>
+                <div>
+                        ${message}
                 </div>
             </form>
 
@@ -60,10 +66,12 @@
 
                             </div>
                             <div class="col col-4 text-center">
-                                <button class="btn btn-primary input-group-append" type="submit"
-                                        style="border-radius: 50%; font-size: 50px">
-                                    <i class="fa fa-refresh"></i>
-                                </button>
+                                <c:if test="${not empty receipt}">
+                                    <button class="btn btn-primary input-group-append" type="submit"
+                                            style="border-radius: 50%; font-size: 50px">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -126,12 +134,7 @@
                                 Return
                             </button>
                         </div>
-<%--                        <div class="col-lg">--%>
-<%--                            <button class="btn btn-primary" type="button"--%>
-<%--                                    style="font-size: 40px; background-color: #080737;width: 100%">--%>
-<%--                                Change--%>
-<%--                            </button>--%>
-<%--                        </div>--%>
+
                     </div>
                 </div>
 

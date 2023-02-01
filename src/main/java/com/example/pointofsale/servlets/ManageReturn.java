@@ -58,10 +58,17 @@ public class ManageReturn extends HttpServlet {
 //            productBean.deleteCarsByIds(carIds);
 //        }
         if (valid.equals("form1")) {
+            try{
             Long id = Long.parseLong(request.getParameter("search_input"));
-            ReceiptDto receipt = receiptBean.findReceiptById(id);
-            request.setAttribute("receipt", receipt);
-            request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
+                ReceiptDto receipt = receiptBean.findReceiptById(id);
+                if (receipt == null) {
+                    request.setAttribute("message", "No receipt found.");
+                }
+                request.setAttribute("receipt", receipt);
+                request.getRequestDispatcher("/WEB-INF/pages/manageReturn.jsp").forward(request, response);
+            } catch (Exception ex){
+                request.setAttribute("message", "No receipt found.");
+            }
 
         } else if (valid.equals("form2")) {
             Long idReceipt = Long.parseLong(receiptId);

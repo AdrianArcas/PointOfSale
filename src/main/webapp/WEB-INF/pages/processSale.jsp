@@ -16,11 +16,18 @@
                 <input type="hidden" id="form1" name="form1" value="form1">
                 <div class="input-group " style="height: 50px">
                     <input type="text" class="form-control border border-2 border-primary" id="search_input"
-                           name="search_input" placeholder="Search product" value="">
+                           name="search_input" placeholder="Search product" value="" required>
                     <button class="btn btn-primary btn-lg btn-block input-group-append" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
+                    <div class="invalid-feedback">
+                        Product name is required.
+                    </div>
                 </div>
+                <div>
+                        ${message}
+                </div>
+
             </form>
 
                 <%-- de afisat poza --%>
@@ -30,9 +37,11 @@
                     <div class="col-sm">
                     </div>
                     <div class="col-sm">
+                        <c:if test="${not empty product}">
                         <img class="card-img-top"
                              src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}"
-                             alt=" "/>
+                             alt=""/>
+                        </c:if>
                     </div>
                     <div class="col-sm">
                     </div>
@@ -62,7 +71,10 @@
                             <div class="col">
                                 <label for="quantity">Quantity:</label>
                                 <input type="number" id="quantity" name="quantity" min="0" max="${product.quantity}"
-                                       style="width: 100px">
+                                       style="width: 100px" required>
+                            </div>
+                            <div class="invalid-feedback">
+                                Quantity is required.
                             </div>
                         </div>
                         <br>
@@ -71,10 +83,12 @@
                                 <p>Quantity available: ${product.quantity} kg </p>
                             </div>
                             <div class="col col-4 text-center">
-                                <button class="btn btn-primary input-group-append" type="submit"
-                                        style="border-radius: 50%; font-size: 50px">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+                                <c:if test="${not empty product}">
+                                    <button class="btn btn-primary input-group-append" type="submit"
+                                            style="border-radius: 50%; font-size: 50px">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -135,12 +149,6 @@
                         <div class="col-lg">
                             <button class="btn btn-primary" type="button" style="font-size: 40px;width: 100%">
                                 Submit
-                            </button>
-                        </div>
-                        <div class="col-lg">
-                            <button class="btn btn-primary" type="button"
-                                    style="font-size: 40px; background-color: #080737;width: 100%">
-                                Change
                             </button>
                         </div>
                     </div>

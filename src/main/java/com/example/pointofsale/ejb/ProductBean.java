@@ -26,14 +26,14 @@ public class ProductBean {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<ProductDto> findAllProducts(){
+    public List<ProductDto> findAllProducts() {
         LOG.info("findAllProducts");
-        try{
+        try {
             TypedQuery<Product> typedQuery = entityManager.createQuery("SELECT p FROM Product p", Product.class);
             List<Product> products = typedQuery.getResultList();
             return copyProductsToDto(products);
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new EJBException(ex);
         }
     }
@@ -41,14 +41,14 @@ public class ProductBean {
     private List<ProductDto> copyProductsToDto(List<Product> products) {
         List<ProductDto> productDtoList = new ArrayList<>();
 
-        for(Product p : products){
+        for (Product p : products) {
             productDtoList.add(new ProductDto(p.getProduct_id(), p.getName(), p.getPrice(), p.getQuantity(), p.getCategory(), p.getTva()));
 
         }
         return productDtoList;
     }
 
-    public void createProduct(String name, Double price,  Integer quantity, Long categoryId, Integer tva){
+    public void createProduct(String name, Double price, Integer quantity, Long categoryId, Integer tva) {
         LOG.info("createProduct");
         Product newProduct = new Product();
         newProduct.setName(name);
@@ -56,7 +56,7 @@ public class ProductBean {
         Category category = entityManager.find(Category.class, categoryId);
         newProduct.setCategory(category);
         newProduct.setTva(tva);
-        BigDecimal bd = BigDecimal.valueOf((((double)tva + 100 )/ 100) *price);
+        BigDecimal bd = BigDecimal.valueOf((((double) tva + 100) / 100) * price);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         newProduct.setPrice(bd.doubleValue());
         entityManager.persist(newProduct);
@@ -101,9 +101,9 @@ public class ProductBean {
                 photo.getFileContent());
     }
 
-    public List<ProductDto>findProductsByCategory(Long categoryId) {
+    public List<ProductDto> findProductsByCategory(Long categoryId) {
         LOG.info("findProductsByCategory");
-        List<Product> productList = entityManager.createQuery( "SELECT p FROM Product p WHERE p.category.category_id = :id", Product.class)
+        List<Product> productList = entityManager.createQuery("SELECT p FROM Product p WHERE p.category.category_id = :id", Product.class)
                 .setParameter("id", categoryId)
                 .getResultList();
         return copyProductsToDto(productList);
@@ -131,12 +131,13 @@ public class ProductBean {
         Category categoryId = entityManager.find(Category.class, category);
         product.setCategory(categoryId);
         product.setTva(tva);
-        BigDecimal bd = BigDecimal.valueOf((((double)tva + 100 )/ 100) *price);
+        BigDecimal bd = BigDecimal.valueOf((((double) tva + 100) / 100) * price);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         product.setPrice(bd.doubleValue());
     }
-    public Collection<String> findProductnamesByIds(Collection<Long> productIds){
-        List<String> productnames=
+
+    public Collection<String> findProductnamesByIds(Collection<Long> productIds) {
+        List<String> productnames =
                 entityManager.createQuery("SELECT p.name FROM Product p WHERE p.product_id IN :productIds", String.class)
                         .setParameter("productIds", productIds).getResultList();
         return productnames;
@@ -152,18 +153,18 @@ public class ProductBean {
             ProductDto productDto = new ProductDto(product.getProduct_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getCategory(), product.getTva());
             return productDto;
         } catch (Exception ex) {
-            throw new EJBException(ex);
+            return null;
         }
     }
 
     public List<ProductDto> findAllLowStockProducts() {
         LOG.info("findAllLowStockProducts");
-        try{
+        try {
             TypedQuery<Product> typedQuery = entityManager.createQuery("SELECT p FROM Product p WHERE p.quantity < 10", Product.class);
             List<Product> products = typedQuery.getResultList();
             return copyProductsToDto(products);
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new EJBException(ex);
         }
     }

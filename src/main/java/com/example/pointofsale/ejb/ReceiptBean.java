@@ -46,10 +46,14 @@ public class ReceiptBean {
     public ReceiptDto findReceiptById(Long receiptId) {
         LOG.info("findReceiptById");
 
-        Receipt receipt = entityManager.find(Receipt.class, receiptId);
+        try {
+            Receipt receipt = entityManager.find(Receipt.class, receiptId);
 
-        ReceiptDto receiptDto = new ReceiptDto(receipt.getId(), receipt.getCashier_name(), receipt.getDate(),  receipt.getTotal());
+            ReceiptDto receiptDto = new ReceiptDto(receipt.getId(), receipt.getCashier_name(), receipt.getDate(), receipt.getTotal());
 
-        return receiptDto;
+            return receiptDto;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

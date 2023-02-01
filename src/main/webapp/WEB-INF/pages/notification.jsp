@@ -4,6 +4,11 @@
 
 <t:pageTemplate pageTitle="Notifications">
     <h1>Notifications</h1>
+    <c:if test="${empty products}">
+        <div class="container text-center">
+            <i><h3 style="color:grey">There are no products that need to be restocked.</h3></i>
+        </div>
+    </c:if>
     <div class="container-md">
     <div class="row row-cols-4 border-5 " style="height: 150px;border-width: 5px;">
     <c:forEach var="product" items="${products}">

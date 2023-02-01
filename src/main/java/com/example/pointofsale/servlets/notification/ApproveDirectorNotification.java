@@ -2,13 +2,17 @@ package com.example.pointofsale.servlets.notification;
 
 import com.example.pointofsale.ejb.AccountBean;
 import com.example.pointofsale.ejb.DirectorNotificationBean;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-
+@DeclareRoles({"Manager", "Cashier","Director"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"Director"}),
+        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
+                {"Director"})})
 @WebServlet(name = "ApproveDirectorNotification", value = "/ApproveDirectorNotification")
 public class ApproveDirectorNotification extends HttpServlet {
     @Inject

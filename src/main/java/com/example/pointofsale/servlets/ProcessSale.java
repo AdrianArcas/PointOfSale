@@ -3,6 +3,8 @@ package com.example.pointofsale.servlets;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.ejb.InvoiceBean;
 import com.example.pointofsale.ejb.ProductBean;
+import com.example.pointofsale.ejb.ReceiptBean;
+import com.example.pointofsale.ejb.ReceiptProductsItemBean;
 import com.example.pointofsale.entities.Product;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
@@ -25,6 +27,10 @@ public class ProcessSale extends HttpServlet {
     ProductBean productBean;
     @Inject
     InvoiceBean invoiceBean;
+    @Inject
+    ReceiptBean receiptBean;
+    @Inject
+    ReceiptProductsItemBean receiptProductsItemBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,6 +79,12 @@ public class ProcessSale extends HttpServlet {
             if(invoiceBean.getIdsToQuantity().containsKey(product)){
                 invoiceBean.substractQuantity(product,quantity);
             }
+
+        } else if(valid.equals("form3")){
+            receiptBean.createReceipt(request.getRemoteUser(), invoiceBean.calcTotal(invoiceBean.getIdsToQuantity()));
+            invoiceBean.createReceiptProductsItems();
+            invoiceBean.getIdsToQuantity().clear();
+
         }
 
         response.sendRedirect(request.getContextPath() + "/ProcessSale");

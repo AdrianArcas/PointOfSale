@@ -33,11 +33,11 @@ public class AddAccount extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String userGroup = request.getParameter("user_group");
+
         accountBean.createUser(username, email, password, userGroup);
 
         Long whoAddedOrDeletedAccID=accountBean.getAccountIdByUsername(request.getRemoteUser());
         Long addedOrDeletedAccID=accountBean.getAccountIdByUsername(username);
-
         directorNotificationBean.createNotification(whoAddedOrDeletedAccID,addedOrDeletedAccID ,"add" );
 
 

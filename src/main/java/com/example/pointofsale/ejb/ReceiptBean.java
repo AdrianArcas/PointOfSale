@@ -10,7 +10,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -55,5 +57,12 @@ public class ReceiptBean {
         } catch (Exception ex) {
             return null;
         }
+    }
+    public void createReceipt(String cashierName,Double total){
+        Receipt newReceipt =new Receipt();
+        newReceipt.setCashier_name(cashierName);
+        newReceipt.setTotal(total);
+        newReceipt.setDate(LocalDateTime.now());
+        entityManager.persist(newReceipt);
     }
 }

@@ -32,11 +32,9 @@ public class DirectorNotificationBean {
     public void createNotification(Long whoAddedOrDeletedAccID , Long AddedOrDeletedAccID, String action) {
         LOG.info("createNotification");
         NotificationAccountsDirector newNotificatioon=new NotificationAccountsDirector();
-
         newNotificatioon.setWho_modified_or_added_id(whoAddedOrDeletedAccID);
         newNotificatioon.setModified_or_added_account_id(AddedOrDeletedAccID);
         newNotificatioon.setAction(action);
-
         entityManager.persist(newNotificatioon);
     }
     public List<DirectorNotificationDto> findAllNotifications(){

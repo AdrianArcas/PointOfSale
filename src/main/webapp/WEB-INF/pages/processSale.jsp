@@ -38,9 +38,9 @@
                     </div>
                     <div class="col-sm">
                         <c:if test="${not empty product}">
-                        <img class="card-img-top"
-                             src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}"
-                             alt=""/>
+                            <img class="card-img-top"
+                                 src="${pageContext.request.contextPath}/ProductPhoto?product_id=${product.product_id}"
+                                 alt=""/>
                         </c:if>
                     </div>
                     <div class="col-sm">
@@ -133,28 +133,32 @@
 
             </div>
 
+            <form class="needs-validation" novalidate method="POST"
+                  action="${pageContext.request.contextPath}/ProcessSale">
+                <input type="hidden" id="form3" name="form1" value="form3">
 
-            <div class="container bottom-0 start-0">
+                <div class="container bottom-0 start-0">
 
-                <div class="row border-5" style="font-size: 25px;width: 100%">
-                    <div class="col fst-italic fw-bold">
-                        <p>Total: <fmt:formatNumber type="number"
-                                                    maxIntegerDigits="3" value="${total}"/>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row text-center">
-                        <div class="col-lg">
-                            <button class="btn btn-primary" type="button" style="font-size: 40px;width: 100%">
-                                Submit
-                            </button>
+                    <div class="row border-5" style="font-size: 25px;width: 100%">
+                        <div class="col fst-italic fw-bold">
+                            <p>Total: <fmt:formatNumber type="number"
+                                                        maxIntegerDigits="3" value="${total}"/>
+                            </p>
                         </div>
                     </div>
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-lg">
+                                <button class="btn btn-primary" type="submit" style="font-size: 40px;width: 100%">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
+            </form>
 
         </div>
 

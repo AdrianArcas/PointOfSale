@@ -3,6 +3,7 @@ package com.example.pointofsale.ejb;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.entities.Product;
 import com.example.pointofsale.entities.Receipt;
+import com.example.pointofsale.entities.ReceiptProductsItem;
 import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.persistence.EntityManager;
@@ -69,6 +70,19 @@ public class InvoiceBean implements Serializable {
     public void substractQuantity(ProductDto p, Long quantity){
         Product product=entityManager.find(Product.class, p.getProduct_id());
         product.setQuantity((int) (product.getQuantity()-quantity));
+    }
+    public void createReceiptProductsItems(){
+        List<Receipt> receipt= entityManager.createQuery("SELECT r FROM Receipt r order by r.id desc  ", Receipt.class).getResultList() ;
+        for (ProductDto p: this.IdsToQuantity.keySet()){
+            ReceiptProductsItem newReceiptProductItem = new ReceiptProductsItem();
+
+            newReceiptProductItem.setProduct_id(Math.toIntExact(p.getProduct_id()));
+            newReceiptProductItem.setQuantity(Math.toIntExact(this.IdsToQuantity.get(p)));
+            newReceiptProductItem.setReceipt(receipt.get(0));
+            entityManager.persist(newReceiptProductItem);
+        }
+
+
     }
 }
 

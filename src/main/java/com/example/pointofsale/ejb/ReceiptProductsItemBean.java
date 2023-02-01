@@ -3,6 +3,7 @@ package com.example.pointofsale.ejb;
 import com.example.pointofsale.common.ProductDto;
 import com.example.pointofsale.common.ReceiptDto;
 import com.example.pointofsale.common.ReceiptProductsItemDto;
+import com.example.pointofsale.entities.Account;
 import com.example.pointofsale.entities.Product;
 import com.example.pointofsale.entities.Receipt;
 import com.example.pointofsale.entities.ReceiptProductsItem;
@@ -63,11 +64,13 @@ public class ReceiptProductsItemBean {
     public HashMap<ProductDto,Long> getProductsByReceiptId(Long id){
         HashMap<ProductDto,Long> productsQuantity = new HashMap<>();
        List<ReceiptProductsItemDto> allPaidProducts = findAllReceiptProducts();
-       for(ReceiptProductsItemDto p : allPaidProducts){
-           if(p.getReceipt().getId() == id){
-               productsQuantity.put(productBean.findProductById(Long.valueOf(p.getProduct_id())),Long.valueOf(p.getQuantity()));
-           }
+       for(ReceiptProductsItemDto p : allPaidProducts) {
+           Long productId = p.getReceipt().getId();
+           if (productId.equals(id))
+               productsQuantity.put(productBean.findProductById(Long.valueOf(p.getProduct_id())), Long.valueOf(p.getQuantity()));
        }
       return  productsQuantity;
     }
+
+
 }
